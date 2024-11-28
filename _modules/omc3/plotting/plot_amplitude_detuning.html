@@ -1,0 +1,1022 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>omc3.plotting.plot_amplitude_detuning &mdash; omc3 0.20.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=449bdd91" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=26ac6f1e"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/omc_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Main Entrypoints</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../entrypoints/analysis.html">Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/analysis.html#hole-in-one">Hole in One</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/analysis.html#amplitude-detuning-analysis">Amplitude Detuning Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../entrypoints/correction.html">Correction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/correction.html#global-correction">Global Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/correction.html#response-creator">Response Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/correction.html#correction-test">Correction Test</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../entrypoints/other.html">Other</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/other.html#tbt-converter">TbT Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/other.html#model-creator">Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/other.html#knob-extractor">Knob Extractor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/other.html#mad-x-wrapper">MAD-X Wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../entrypoints/plotting.html">Plotting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/plotting.html#plot-optics-measurements">Plot Optics Measurements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/plotting.html#plot-tfs">Plot TFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/plotting.html#plot-spectrum">Plot Spectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/plotting.html#plot-correction-test">Plot Correction Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/plotting.html#plot-amplitude-detuning-results">Plot Amplitude Detuning Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/plotting.html#plot-k-modulation-results">Plot K-Modulation Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/plotting.html#plot-bbq">Plot BBQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../entrypoints/scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/scripts.html#betabeat-src-output-converter">BetaBeat.src Output Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/scripts.html#import-k-modulation-results">Import K-Modulation Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/scripts.html#k-mod-luminosity-imbalance">K-Mod Luminosity Imbalance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/scripts.html#update-natural-tune-in-lin-files">Update Natural Tune in Lin-Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/scripts.html#write-mad-x-macros">Write MAD-X Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/scripts.html#fake-measurement-from-model">Fake Measurement from Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/scripts.html#linfile-cleaning">Linfile Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../entrypoints/scripts.html#bad-bpms-summary">Bad BPMs Summary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/correction.html">Correction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/correction.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/correction.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/correction.html#handler">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/correction.html#model-appenders">Model Appenders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/correction.html#model-diff">Model Diff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/correction.html#response-mad-x">Response MAD-X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/correction.html#response-twiss">Response TWISS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/correction.html#sequence-evaluation">Sequence Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/correction.html#response-matrix-io">Response Matrix IO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/definitions.html">Definitions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/definitions.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/definitions.html#formats">Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/harpy.html">Harpy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/harpy.html#clean">Clean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/harpy.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/harpy.html#frequency">Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/harpy.html#handler">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/harpy.html#kicker">Kicker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/model.html">Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#manager">Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#accelerator">Accelerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#esrf">ESRF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#lhc">LHC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#ps">PS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#ps-booster">PS Booster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#superkekb">SuperKEKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#iota">Iota</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#petra">PETRA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#lhc-model-creator">LHC Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#ps-model-creator">PS Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#ps-booster-model-creator">PS Booster Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/model.html#segment-creator">Segment Creator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/optics_measurements.html">Optics Measurements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#measure-optics">Measure Optics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#beta-from-amplitude">Beta from Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#beta-from-phase">Beta from Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#chromatic">Chromatic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#combined-rdts">Combined RDTs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#data-models">Data Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#dispersion">Dispersion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#dpp">Dpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#isolation-forest">Isolation Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#interaction-point">Interaction Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#kick">Kick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#phase-advance">Phase Advance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#resonance-driving-terms">Resonance Driving Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#toolbox">Toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/optics_measurements.html#tune">Tune</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/plotting.html">Plot-Subfunctions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/plotting.html#optics-measurements-plots">Optics Measurements Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/plotting.html#spectrum-plots">Spectrum Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/plotting.html#common-plot-functionality">Common Plot Functionality</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/tune_analysis.html">Tune Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/tune_analysis.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/tune_analysis.html#bbq-tools">BBQ Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/tune_analysis.html#fitting-tools">Fitting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/tune_analysis.html#kick-file-modifiers">Kick File Modifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/tune_analysis.html#timber-extraction">Timber Extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/utils.html#contexts">Contexts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/utils.html#io-tools">IO Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/utils.html#logging-tools">Logging Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/utils.html#mock">Mock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/utils.html#outliers">Outliers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/utils.html#stats">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/utils.html#time-tools">Time Tools</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">omc3</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">omc3.plotting.plot_amplitude_detuning</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  
+  
+           <div itemprop="articleBody">
+             
+  <h1>Source code for omc3.plotting.plot_amplitude_detuning</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Plot Amplitude Detuning Results</span>
+<span class="sd">-------------------------------</span>
+
+<span class="sd">Provides the plotting function for amplitude detuning analysis</span>
+
+<span class="sd">**Arguments:**</span>
+
+<span class="sd">*--Required--*</span>
+
+<span class="sd">- **kicks**:</span>
+
+<span class="sd">    Kick files as data frames or tfs files.</span>
+
+
+<span class="sd">- **labels** *(str)*:</span>
+
+<span class="sd">    Labels for the data. Needs to be same length as kicks.</span>
+
+
+<span class="sd">- **plane** *(str)*:</span>
+
+<span class="sd">    Plane of the kicks.</span>
+
+<span class="sd">    choices: ``[&#39;X&#39;, &#39;Y&#39;, &#39;XY&#39;, &#39;3D&#39;]``</span>
+
+
+<span class="sd">*--Optional--*</span>
+
+<span class="sd">- **action_plot_unit** *(str)*:</span>
+
+<span class="sd">    Unit the action should be plotted in.</span>
+
+<span class="sd">    choices: ``[&#39;km&#39;, &#39;m&#39;, &#39;mm&#39;, &#39;um&#39;, &#39;nm&#39;, &#39;pm&#39;, &#39;fm&#39;, &#39;am&#39;]``</span>
+
+<span class="sd">    default: ``um``</span>
+
+
+<span class="sd">- **action_unit** *(str)*:</span>
+
+<span class="sd">    Unit the action is given in.</span>
+
+<span class="sd">    choices: ``[&#39;km&#39;, &#39;m&#39;, &#39;mm&#39;, &#39;um&#39;, &#39;nm&#39;, &#39;pm&#39;, &#39;fm&#39;, &#39;am&#39;]``</span>
+
+<span class="sd">    default: ``m``</span>
+
+
+<span class="sd">- **bbq_corrected** *(bool)*:</span>
+
+<span class="sd">    Plot the data with BBQ correction (``True``) or without (``False``).</span>
+<span class="sd">    ``None`` plots both in separate plots. Default: ``None``.</span>
+
+
+<span class="sd">- **correct_acd**:</span>
+
+<span class="sd">    Correct for AC-Dipole kicks.</span>
+
+<span class="sd">    action: ``store_true``</span>
+
+
+<span class="sd">- **detuning_order** *(int)*:</span>
+
+<span class="sd">    Order of the detuning as int. Basically just the order of the applied</span>
+<span class="sd">    fit.</span>
+
+<span class="sd">    default: ``1``</span>
+
+
+<span class="sd">- **manual_style** *(DictAsString)*:</span>
+
+<span class="sd">    Additional style rcParameters which update the set of predefined ones.</span>
+
+<span class="sd">    default: ``{}``</span>
+
+
+<span class="sd">- **output** *(str)*:</span>
+
+<span class="sd">    Save the amplitude detuning plot here. Give filename with extension.</span>
+<span class="sd">    An id for the 4 different plots will be added before the suffix.</span>
+
+
+<span class="sd">- **plot_styles** *(UnionPathStr)*:</span>
+
+<span class="sd">    Plotting styles.</span>
+
+<span class="sd">    default: ``[&#39;standard&#39;, &#39;amplitude_detuning&#39;]``</span>
+
+
+<span class="sd">- **show**:</span>
+
+<span class="sd">    Show the amplitude detuning plot.</span>
+
+<span class="sd">    action: ``store_true``</span>
+
+
+<span class="sd">- **tune_scale** *(int)*:</span>
+
+<span class="sd">    Plotting exponent of the tune.</span>
+
+<span class="sd">    default: ``-3``</span>
+
+
+<span class="sd">- **x_lim** *(float)*:</span>
+
+<span class="sd">    Action limits in um (x-axis).</span>
+
+
+<span class="sd">- **y_lim** *(float)*:</span>
+
+<span class="sd">    Tune limits in units of tune scale (y-axis).</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Sequence</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">generic_parser</span> <span class="kn">import</span> <span class="n">DotDict</span><span class="p">,</span> <span class="n">EntryPointParameters</span><span class="p">,</span> <span class="n">entrypoint</span>
+<span class="kn">from</span> <span class="nn">generic_parser.entry_datatypes</span> <span class="kn">import</span> <span class="n">DictAsString</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">MatplotlibDeprecationWarning</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">colors</span> <span class="k">as</span> <span class="n">mcolors</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">from</span> <span class="nn">matplotlib.axes</span> <span class="kn">import</span> <span class="n">Axes</span>
+<span class="kn">from</span> <span class="nn">matplotlib.figure</span> <span class="kn">import</span> <span class="n">Figure</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">ArrayLike</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">odr</span>
+<span class="kn">from</span> <span class="nn">tfs.tools</span> <span class="kn">import</span> <span class="n">significant_digits</span>
+
+<span class="kn">from</span> <span class="nn">omc3.definitions.constants</span> <span class="kn">import</span> <span class="n">PLANES</span><span class="p">,</span> <span class="n">UNIT_IN_METERS</span>
+<span class="kn">from</span> <span class="nn">omc3.plotting.utils</span> <span class="kn">import</span> <span class="n">annotations</span> <span class="k">as</span> <span class="n">pannot</span>
+<span class="kn">from</span> <span class="nn">omc3.plotting.utils</span> <span class="kn">import</span> <span class="n">colors</span> <span class="k">as</span> <span class="n">pcolors</span>
+<span class="kn">from</span> <span class="nn">omc3.plotting.utils</span> <span class="kn">import</span> <span class="n">style</span> <span class="k">as</span> <span class="n">pstyle</span>
+<span class="kn">from</span> <span class="nn">omc3.tune_analysis</span> <span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">const</span>
+<span class="kn">from</span> <span class="nn">omc3.tune_analysis</span> <span class="kn">import</span> <span class="n">fitting_tools</span>
+<span class="kn">from</span> <span class="nn">omc3.tune_analysis</span> <span class="kn">import</span> <span class="n">kick_file_modifiers</span> <span class="k">as</span> <span class="n">kick_mod</span>
+<span class="kn">from</span> <span class="nn">omc3.tune_analysis.kick_file_modifiers</span> <span class="kn">import</span> <span class="n">AmpDetData</span>
+<span class="kn">from</span> <span class="nn">omc3.utils</span> <span class="kn">import</span> <span class="n">logging_tools</span>
+<span class="kn">from</span> <span class="nn">omc3.utils.contexts</span> <span class="kn">import</span> <span class="n">suppress_warnings</span>
+<span class="kn">from</span> <span class="nn">omc3.utils.iotools</span> <span class="kn">import</span> <span class="n">PathOrStr</span><span class="p">,</span> <span class="n">UnionPathStr</span><span class="p">,</span> <span class="n">save_config</span>
+
+<span class="n">LOG</span> <span class="o">=</span> <span class="n">logging_tools</span><span class="o">.</span><span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">NFIT</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Points for the fitting function</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">PLANES</span>
+
+
+<span class="k">def</span> <span class="nf">get_params</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">EntryPointParameters</span><span class="p">(</span>
+        <span class="n">kicks</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Kick files as data frames or tfs files.&quot;</span><span class="p">,</span>
+            <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">labels</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Labels for the data. Needs to be same length as kicks.&quot;</span><span class="p">,</span>
+            <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span>
+            <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">plane</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plane of the kicks.&quot;</span><span class="p">,</span>
+            <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">choices</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">PLANES</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">PLANES</span><span class="p">),</span> <span class="s1">&#39;3D&#39;</span><span class="p">],</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">detuning_order</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Order of the detuning as int. Basically just the order of the applied fit.&quot;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">correct_acd</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Correct for AC-Dipole kicks.&quot;</span><span class="p">,</span>
+            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">output</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Save the amplitude detuning plot here. &quot;</span>
+                  <span class="s2">&quot;Give filename with extension. An id for the 4 different &quot;</span>
+                  <span class="s2">&quot;plots will be added before the suffix.&quot;</span><span class="p">),</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">PathOrStr</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">show</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Show the amplitude detuning plot.&quot;</span><span class="p">,</span>
+            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">y_lim</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Tune limits in units of tune scale (y-axis).&quot;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">nargs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">x_lim</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Action limits in um (x-axis).&quot;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+            <span class="n">nargs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">action_unit</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Unit the action is given in.&quot;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span>
+            <span class="n">choices</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">UNIT_IN_METERS</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">action_plot_unit</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Unit the action should be plotted in.&quot;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="s2">&quot;um&quot;</span><span class="p">,</span>
+            <span class="n">choices</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">UNIT_IN_METERS</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">manual_style</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">DictAsString</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Additional style rcParameters which update the set of predefined ones.&#39;</span>
+        <span class="p">),</span>
+        <span class="n">plot_styles</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plotting styles.&quot;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="n">UnionPathStr</span><span class="p">,</span>
+            <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span> <span class="s1">&#39;amplitude_detuning&#39;</span><span class="p">],</span>
+        <span class="p">),</span>
+        <span class="n">tune_scale</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plotting exponent of the tune.&quot;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">bbq_corrected</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Plot the data with BBQ correction (``True``) or without (``False``).&quot;</span>
+                 <span class="s2">&quot; ``None`` plots both in separate plots. Default: ``None``.&quot;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+
+<span class="nd">@entrypoint</span><span class="p">(</span><span class="n">get_params</span><span class="p">(),</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+    <span class="n">LOG</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Plotting Amplitude Detuning Results.&quot;</span><span class="p">)</span>
+    <span class="n">_save_options</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span>
+    <span class="n">_check_opt</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span>
+
+    <span class="n">figs</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">pstyle</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">plot_styles</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">manual_style</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">tune_plane</span> <span class="ow">in</span> <span class="n">PLANES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">plane</span> <span class="o">==</span> <span class="s2">&quot;3D&quot;</span><span class="p">:</span>
+            <span class="n">figs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">_plot_3d</span><span class="p">(</span><span class="n">tune_plane</span><span class="p">,</span> <span class="n">opt</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">figs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">_plot_2d</span><span class="p">(</span><span class="n">tune_plane</span><span class="p">,</span> <span class="n">opt</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">show</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">figs</span>
+
+
+<span class="c1"># Plotting --------------------------------------------------------------</span>
+
+<span class="c1"># 2D Plots ----------------------------</span>
+
+<span class="k">def</span> <span class="nf">_plot_2d</span><span class="p">(</span><span class="n">tune_plane</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">opt</span><span class="p">:</span> <span class="n">DotDict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Figure</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; 2D Plots per kick-plane and with/without BBQ correction. &quot;&quot;&quot;</span>
+    <span class="n">figs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">limits</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">get_subdict</span><span class="p">([</span><span class="s1">&#39;x_lim&#39;</span><span class="p">,</span> <span class="s1">&#39;y_lim&#39;</span><span class="p">])</span>
+    <span class="n">tune_scale</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">opt</span><span class="o">.</span><span class="n">tune_scale</span>
+
+    <span class="k">for</span> <span class="n">action_plane</span> <span class="ow">in</span> <span class="n">opt</span><span class="o">.</span><span class="n">plane</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">corrected</span> <span class="ow">in</span> <span class="n">opt</span><span class="o">.</span><span class="n">bbq_corrected</span><span class="p">:</span>  <span class="c1"># with / without BBQ correction</span>
+            <span class="n">corr_label</span> <span class="o">=</span> <span class="s2">&quot;_corrected&quot;</span> <span class="k">if</span> <span class="n">corrected</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+            <span class="n">isempty</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">kick_file</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">kicks</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">labels</span><span class="p">)):</span>
+                <span class="n">kick_df</span> <span class="o">=</span> <span class="n">kick_mod</span><span class="o">.</span><span class="n">read_timed_dataframe</span><span class="p">(</span><span class="n">kick_file</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kick_file</span><span class="p">,</span> <span class="n">PathOrStr</span><span class="p">)</span> <span class="k">else</span> <span class="n">kick_file</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">kick_mod</span><span class="o">.</span><span class="n">get_ampdet_data</span><span class="p">(</span><span class="n">kick_df</span><span class="p">,</span>
+                                                    <span class="n">tune_plane</span><span class="o">=</span><span class="n">tune_plane</span><span class="p">,</span>
+                                                    <span class="n">action_plane</span><span class="o">=</span><span class="n">action_plane</span><span class="p">,</span>
+                                                    <span class="n">corrected</span><span class="o">=</span><span class="n">corrected</span>
+                                                    <span class="p">)</span>
+                <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entries not found in dataframe: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>  <span class="c1"># should only happen when there is no &#39;corrected&#39; columns</span>
+
+                <span class="c1"># Read data from kick_df headers ---</span>
+                <span class="n">odr_fit</span> <span class="o">=</span> <span class="n">kick_mod</span><span class="o">.</span><span class="n">get_odr_data</span><span class="p">(</span><span class="n">kick_df</span><span class="p">,</span>
+                                                <span class="n">tune_plane</span><span class="o">=</span><span class="n">tune_plane</span><span class="p">,</span>
+                                                <span class="n">action_plane</span><span class="o">=</span><span class="n">action_plane</span><span class="p">,</span>
+                                                <span class="n">order</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">detuning_order</span><span class="p">,</span>
+                                                <span class="n">corrected</span><span class="o">=</span><span class="n">corrected</span>
+                                                <span class="p">)</span>
+
+                <span class="c1"># Get label for ODR fit ---</span>
+                <span class="n">odr_label</span> <span class="o">=</span> <span class="n">_get_odr_label</span><span class="p">(</span><span class="n">odr_fit</span><span class="p">,</span>
+                                           <span class="n">tune_plane</span><span class="o">=</span><span class="n">tune_plane</span><span class="p">,</span>
+                                           <span class="n">action_plane</span><span class="o">=</span><span class="n">action_plane</span><span class="p">,</span>
+                                           <span class="n">action_unit</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">action_unit</span><span class="p">,</span>
+                                           <span class="n">do_acd_correction</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">correct_acd</span>
+                                           <span class="p">)</span>
+
+                <span class="c1"># Scale and Plot ---</span>
+                <span class="n">data</span><span class="p">,</span> <span class="n">odr_fit</span> <span class="o">=</span> <span class="n">_scale_data</span><span class="p">(</span>
+                    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">odr_fit</span><span class="o">=</span><span class="n">odr_fit</span><span class="p">,</span>
+                    <span class="n">action_unit</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">action_unit</span><span class="p">,</span> <span class="n">action_plot_unit</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">action_plot_unit</span><span class="p">,</span>
+                    <span class="n">tune_scale</span><span class="o">=</span><span class="n">tune_scale</span>
+                <span class="p">)</span>
+                <span class="n">_plot_detuning</span><span class="p">(</span>
+                    <span class="n">ax</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">,</span>
+                    <span class="n">odr_fit</span><span class="o">=</span><span class="n">odr_fit</span><span class="p">,</span> <span class="n">odr_label</span><span class="o">=</span><span class="n">odr_label</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="n">pcolors</span><span class="o">.</span><span class="n">get_mpl_color</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span>
+                <span class="p">)</span>
+                <span class="n">isempty</span> <span class="o">=</span> <span class="kc">False</span>
+
+            <span class="k">if</span> <span class="n">isempty</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>  <span class="c1"># don&#39;t show empty figs</span>
+                <span class="k">continue</span>  <span class="c1"># don&#39;t save/return empty figures</span>
+
+            <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">correct_acd</span> <span class="ow">and</span> <span class="n">tune_plane</span> <span class="o">==</span> <span class="n">action_plane</span><span class="p">:</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="s2">&quot;* corrected for AC-Dipole.&quot;</span><span class="p">,</span>
+                        <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-small&quot;</span><span class="p">,</span>
+                        <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+                        <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+                        <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+                        <span class="p">)</span>
+
+            <span class="n">id_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;dQ</span><span class="si">{</span><span class="n">tune_plane</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">d2J</span><span class="si">{</span><span class="n">action_plane</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">:</span><span class="s2">s</span><span class="si">}{</span><span class="n">corr_label</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">pannot</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="n">id_str</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+
+            <span class="n">ax_labels</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">const</span><span class="o">.</span><span class="n">get_action_label</span><span class="p">(</span><span class="n">action_plane</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">action_plot_unit</span><span class="p">),</span>
+                <span class="n">const</span><span class="o">.</span><span class="n">get_tune_label</span><span class="p">(</span><span class="n">tune_plane</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">tune_scale</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">_format_axes</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">ax_labels</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">id_str</span><span class="si">}{</span><span class="n">output</span><span class="o">.</span><span class="n">suffix</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="n">figs</span><span class="p">[</span><span class="n">id_str</span><span class="p">]</span> <span class="o">=</span> <span class="n">fig</span>
+    <span class="k">return</span> <span class="n">figs</span>
+
+
+<div class="viewcode-block" id="plot_odr">
+<a class="viewcode-back" href="../../../entrypoints/plotting.html#omc3.plotting.plot_amplitude_detuning.plot_odr">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_odr</span><span class="p">(</span><span class="n">ax</span><span class="p">:</span> <span class="n">Axes</span><span class="p">,</span> <span class="n">odr_fit</span><span class="p">:</span> <span class="n">odr</span><span class="o">.</span><span class="n">Output</span><span class="p">,</span> <span class="n">xmax</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds a quadratic odr fit to axes.&quot;&quot;&quot;</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span> <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">color</span>
+    <span class="n">odr_fit</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># no need to remove offset, as it is removed from data</span>
+
+    <span class="c1"># get fits</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">odr_fit</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">fit_fun</span> <span class="o">=</span> <span class="n">fitting_tools</span><span class="o">.</span><span class="n">get_poly_fun</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">fit_fun</span><span class="p">,</span> <span class="n">odr_fit</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span>
+    <span class="n">f_low</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">fit_fun</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">odr_fit</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">odr_fit</span><span class="o">.</span><span class="n">sd_beta</span><span class="p">))</span>
+    <span class="n">f_upp</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">fit_fun</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">odr_fit</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">odr_fit</span><span class="o">.</span><span class="n">sd_beta</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">order</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">NFIT</span><span class="p">)</span>
+
+    <span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_low</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">f_upp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">mcolors</span><span class="o">.</span><span class="n">to_rgba</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="mf">.3</span><span class="p">),</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">color</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_plot_detuning</span><span class="p">(</span><span class="n">ax</span><span class="p">:</span> <span class="n">Axes</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">AmpDetData</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">limits</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">odr_fit</span><span class="p">:</span> <span class="n">odr</span><span class="o">.</span><span class="n">Output</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">odr_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the detuning and the ODR into axes.&quot;&quot;&quot;</span>
+    <span class="n">x_lim</span> <span class="o">=</span> <span class="n">_get_default</span><span class="p">(</span><span class="n">limits</span><span class="p">,</span> <span class="s1">&#39;x_lim&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">action</span><span class="o">+</span><span class="n">data</span><span class="o">.</span><span class="n">action_err</span><span class="p">)])</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Plot Fit</span>
+    <span class="k">if</span> <span class="n">odr_fit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">odr_fit</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">plot_odr</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">odr_fit</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="n">x_lim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">odr_label</span><span class="p">)</span>
+
+    <span class="c1"># Plot Data</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">tune</span> <span class="o">-=</span> <span class="n">offset</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">action</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">action_err</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">tune</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">tune_err</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_format_axes</span><span class="p">(</span><span class="n">ax</span><span class="p">:</span> <span class="n">Axes</span><span class="p">,</span> <span class="n">limits</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">labels</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="c1"># labels</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># limits</span>
+    <span class="k">if</span> <span class="n">limits</span><span class="p">[</span><span class="s1">&#39;x_lim&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="s1">&#39;x_lim&#39;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">limits</span><span class="p">[</span><span class="s1">&#39;y_lim&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="s1">&#39;y_lim&#39;</span><span class="p">])</span>
+
+    <span class="n">pannot</span><span class="o">.</span><span class="n">make_top_legend</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="c1"># 3D Plots ----------------------------</span>
+
+<span class="k">def</span> <span class="nf">_plot_3d</span><span class="p">(</span><span class="n">tune_plane</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">opt</span><span class="p">:</span> <span class="n">DotDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; 3D Plots for both kick-planes, one plot each with/without BBQ correction. &quot;&quot;&quot;</span>
+    <span class="n">figs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">limits</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">get_subdict</span><span class="p">([</span><span class="s1">&#39;x_lim&#39;</span><span class="p">,</span> <span class="s1">&#39;y_lim&#39;</span><span class="p">])</span>
+    <span class="n">tune_scale</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">opt</span><span class="o">.</span><span class="n">tune_scale</span>
+
+    <span class="k">for</span> <span class="n">corrected</span> <span class="ow">in</span> <span class="n">opt</span><span class="o">.</span><span class="n">bbq_corrected</span><span class="p">:</span>  <span class="c1"># with / without BBQ correction</span>
+        <span class="n">corr_label</span> <span class="o">=</span> <span class="s2">&quot;_corrected&quot;</span> <span class="k">if</span> <span class="n">corrected</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="c1"># hack to draw spines properly, as their style is</span>
+        <span class="c1"># determined by lines</span>
+        <span class="n">rc_save</span> <span class="o">=</span> <span class="n">rcParams</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;lines.linestyle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+        <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;lines.marker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+        <span class="n">all_odr_labels</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">kicks</span><span class="p">)</span>
+
+        <span class="c1"># restore rcParams from before the hack</span>
+        <span class="k">with</span> <span class="n">suppress_warnings</span><span class="p">(</span><span class="n">MatplotlibDeprecationWarning</span><span class="p">):</span>
+            <span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">rc_save</span><span class="p">)</span>
+        <span class="n">isempty</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">kick_file</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">kicks</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">labels</span><span class="p">)):</span>
+            <span class="n">kick_df</span> <span class="o">=</span> <span class="n">kick_mod</span><span class="o">.</span><span class="n">read_timed_dataframe</span><span class="p">(</span><span class="n">kick_file</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">kick_file</span><span class="p">,</span> <span class="n">PathOrStr</span><span class="p">)</span> <span class="k">else</span> <span class="n">kick_file</span>
+
+            <span class="n">datas</span><span class="p">,</span> <span class="n">odr_fits</span><span class="p">,</span> <span class="n">odr_labels</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">action_plane</span> <span class="ow">in</span> <span class="n">PLANES</span><span class="p">:</span>
+                <span class="n">do_acd_correction</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">correct_acd</span> <span class="ow">and</span> <span class="p">(</span><span class="n">action_plane</span> <span class="o">==</span> <span class="n">tune_plane</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">kick_mod</span><span class="o">.</span><span class="n">get_ampdet_data</span><span class="p">(</span><span class="n">kick_df</span><span class="p">,</span>
+                                                    <span class="n">action_plane</span><span class="o">=</span><span class="n">action_plane</span><span class="p">,</span>
+                                                    <span class="n">tune_plane</span><span class="o">=</span><span class="n">tune_plane</span><span class="p">,</span>
+                                                    <span class="n">corrected</span><span class="o">=</span><span class="n">corrected</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">LOG</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                    <span class="k">continue</span>  <span class="c1"># should only happen when there is no &#39;corrected&#39; columns</span>
+
+                <span class="c1"># Read data from kick_df headers ---</span>
+                <span class="n">odr_fit</span> <span class="o">=</span> <span class="n">kick_mod</span><span class="o">.</span><span class="n">get_odr_data</span><span class="p">(</span><span class="n">kick_df</span><span class="p">,</span> <span class="n">action_plane</span><span class="p">,</span> <span class="n">tune_plane</span><span class="p">,</span>
+                                                <span class="n">order</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">detuning_order</span><span class="p">,</span>
+                                                <span class="n">corrected</span><span class="o">=</span><span class="n">corrected</span><span class="p">)</span>
+
+                <span class="c1"># Get label for ODR fit ---</span>
+                <span class="n">odr_label</span> <span class="o">=</span> <span class="n">_get_odr_label</span><span class="p">(</span><span class="n">odr_fit</span><span class="p">,</span>
+                                           <span class="n">tune_plane</span><span class="o">=</span><span class="n">tune_plane</span><span class="p">,</span>
+                                           <span class="n">action_plane</span><span class="o">=</span><span class="n">action_plane</span><span class="p">,</span>
+                                           <span class="n">action_unit</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">action_unit</span><span class="p">,</span>
+                                           <span class="n">do_acd_correction</span><span class="o">=</span><span class="n">do_acd_correction</span><span class="p">)</span>
+
+                <span class="c1"># Scale ---</span>
+                <span class="n">data</span><span class="p">,</span> <span class="n">odr_fit</span> <span class="o">=</span> <span class="n">_scale_data</span><span class="p">(</span>
+                    <span class="n">data</span><span class="p">,</span> <span class="n">odr_fit</span><span class="p">,</span>
+                    <span class="n">opt</span><span class="o">.</span><span class="n">action_unit</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">action_plot_unit</span><span class="p">,</span>
+                    <span class="n">tune_scale</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Save ---</span>
+                <span class="n">isempty</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">odr_fits</span><span class="p">[</span><span class="n">action_plane</span><span class="p">]</span> <span class="o">=</span> <span class="n">odr_fit</span>
+                <span class="n">odr_labels</span><span class="p">[</span><span class="n">action_plane</span><span class="p">]</span> <span class="o">=</span> <span class="n">odr_label</span>
+                <span class="n">datas</span><span class="p">[</span><span class="n">action_plane</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">datas</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">_plot_detuning_3d</span><span class="p">(</span>
+                <span class="n">ax</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">datas</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">,</span>
+                <span class="n">odr_fits</span><span class="o">=</span><span class="n">odr_fits</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">pcolors</span><span class="o">.</span><span class="n">get_mpl_color</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="n">all_odr_labels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">odr_labels</span>
+
+        <span class="k">if</span> <span class="n">isempty</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>  <span class="c1"># don&#39;t show empty figs</span>
+            <span class="k">continue</span>  <span class="c1"># don&#39;t save/return empty figures</span>
+
+        <span class="n">id_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;dQ</span><span class="si">{</span><span class="n">tune_plane</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">d2JXY_3D</span><span class="si">{</span><span class="n">corr_label</span><span class="si">:</span><span class="s2">s</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">pannot</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="n">id_str</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+
+        <span class="n">ax_labels</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">const</span><span class="o">.</span><span class="n">get_action_label</span><span class="p">(</span><span class="n">PLANES</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">opt</span><span class="o">.</span><span class="n">action_plot_unit</span><span class="p">),</span>
+            <span class="n">const</span><span class="o">.</span><span class="n">get_action_label</span><span class="p">(</span><span class="n">PLANES</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">opt</span><span class="o">.</span><span class="n">action_plot_unit</span><span class="p">),</span>
+            <span class="n">const</span><span class="o">.</span><span class="n">get_tune_label</span><span class="p">(</span><span class="n">tune_plane</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">tune_scale</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">azim</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">elev</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        <span class="n">_format_axes_3d</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">ax_labels</span><span class="o">=</span><span class="n">ax_labels</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">,</span>
+                        <span class="n">acd</span><span class="o">=</span><span class="n">opt</span><span class="o">.</span><span class="n">correct_acd</span><span class="p">,</span> <span class="n">odr_labels</span><span class="o">=</span><span class="n">all_odr_labels</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">id_str</span><span class="si">}{</span><span class="n">output</span><span class="o">.</span><span class="n">suffix</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">figs</span><span class="p">[</span><span class="n">id_str</span><span class="p">]</span> <span class="o">=</span> <span class="n">fig</span>
+    <span class="k">return</span> <span class="n">figs</span>
+
+
+<span class="k">def</span> <span class="nf">_plot_detuning_3d</span><span class="p">(</span><span class="n">ax</span><span class="p">:</span> <span class="n">Axes</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">AmpDetData</span><span class="p">],</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">odr_fits</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Plot the detuning and the ODR into axes.&quot;&quot;&quot;</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">jx</span><span class="p">,</span> <span class="n">jx_err</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">action</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">action_err</span>
+    <span class="n">jy</span><span class="p">,</span> <span class="n">jy_err</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">Y</span><span class="p">]</span><span class="o">.</span><span class="n">action</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">Y</span><span class="p">]</span><span class="o">.</span><span class="n">action_err</span>
+    <span class="n">tune</span><span class="p">,</span> <span class="n">tune_err</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">tune</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">tune_err</span>
+    <span class="n">x_lim</span> <span class="o">=</span> <span class="n">_get_default</span><span class="p">(</span><span class="n">limits</span><span class="p">,</span> <span class="s1">&#39;x_lim&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">jx</span><span class="o">+</span><span class="n">jx_err</span><span class="p">)])</span>
+    <span class="n">y_lim</span> <span class="o">=</span> <span class="n">_get_default</span><span class="p">(</span><span class="n">limits</span><span class="p">,</span> <span class="s1">&#39;x_lim&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">jy</span><span class="o">+</span><span class="n">jy_err</span><span class="p">)])</span>
+
+    <span class="c1"># Plot Fit</span>
+    <span class="k">if</span> <span class="n">odr_fits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">plot_odr_3d</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">odr_fits</span><span class="p">,</span> <span class="n">xymax</span><span class="o">=</span><span class="p">[</span><span class="n">x_lim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y_lim</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+    <span class="c1"># Plot Data</span>
+    <span class="n">tune</span> <span class="o">-=</span> <span class="n">offset</span>
+
+    <span class="c1"># there is no errorbar3D in mpl it seems</span>
+    <span class="c1"># so plotting is done manually.</span>
+    <span class="c1"># plot points</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">jx</span><span class="p">,</span> <span class="n">jy</span><span class="p">,</span> <span class="n">tune</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span>
+
+    <span class="c1"># plot errorbars</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tune</span><span class="p">)):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">jx</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">jx_err</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">jy</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">jy_err</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">z</span><span class="p">,</span> <span class="n">dz</span> <span class="o">=</span> <span class="n">tune</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">tune_err</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">+</span><span class="n">dx</span><span class="p">,</span> <span class="n">x</span><span class="o">-</span><span class="n">dx</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="o">+</span><span class="n">dy</span><span class="p">,</span> <span class="n">y</span><span class="o">-</span><span class="n">dy</span><span class="p">],</span> <span class="p">[</span><span class="n">z</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> <span class="p">[</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="p">[</span><span class="n">z</span><span class="o">+</span><span class="n">dz</span><span class="p">,</span> <span class="n">z</span><span class="o">-</span><span class="n">dz</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="FitFuncs">
+<a class="viewcode-back" href="../../../entrypoints/plotting.html#omc3.plotting.plot_amplitude_detuning.FitFuncs">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">FitFuncs</span><span class="p">:</span>
+    <span class="n">fit</span><span class="p">:</span> <span class="nb">callable</span>
+    <span class="n">upper</span><span class="p">:</span> <span class="nb">callable</span>
+    <span class="n">lower</span><span class="p">:</span> <span class="nb">callable</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">fit_fun_odr_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">qdx</span><span class="p">,</span> <span class="n">qdy</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">q0</span> <span class="o">+</span> <span class="n">qdx</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">qdy</span> <span class="o">*</span> <span class="n">y</span>
+
+
+<div class="viewcode-block" id="plot_odr_3d">
+<a class="viewcode-back" href="../../../entrypoints/plotting.html#omc3.plotting.plot_amplitude_detuning.plot_odr_3d">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_odr_3d</span><span class="p">(</span><span class="n">ax</span><span class="p">:</span> <span class="n">Axes</span><span class="p">,</span> <span class="n">odr_fits</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">odr</span><span class="o">.</span><span class="n">Output</span><span class="p">],</span> <span class="n">xymax</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot the odr fit in 3D.&quot;&quot;&quot;</span>
+
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span> <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">color</span>
+    <span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># no need to remove offset, as it is removed from data</span>
+    <span class="n">odr_fits</span><span class="p">[</span><span class="n">Y</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># no need to remove offset, as it is removed from data</span>
+
+    <span class="c1"># get fits</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">order</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;ODR fit plots for order &gt; 1 are not implemented.&quot;</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">fit_fun_odr_1d</span><span class="p">,</span>
+                <span class="n">q0</span><span class="o">=</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">qdx</span><span class="o">=</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">qdy</span><span class="o">=</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">Y</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">f_low</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">fit_fun_odr_1d</span><span class="p">,</span>
+                    <span class="n">q0</span><span class="o">=</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">sd_beta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">qdx</span><span class="o">=</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">sd_beta</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">qdy</span><span class="o">=</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">Y</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">Y</span><span class="p">]</span><span class="o">.</span><span class="n">sd_beta</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">f_upp</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">fit_fun_odr_1d</span><span class="p">,</span>
+                    <span class="n">q0</span><span class="o">=</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">sd_beta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">qdx</span><span class="o">=</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">.</span><span class="n">sd_beta</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">qdy</span><span class="o">=</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">Y</span><span class="p">]</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">odr_fits</span><span class="p">[</span><span class="n">Y</span><span class="p">]</span><span class="o">.</span><span class="n">sd_beta</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xymax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xymax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">xm</span><span class="p">,</span> <span class="n">ym</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># line = ax.plot_surface(xm, ym, f(xm, ym), color=color, label=label, alpha=0.3)</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot_wireframe</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">ym</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">ym</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span>
+
+    <span class="c1"># Plot only the lower and upper boundaries</span>
+    <span class="c1"># ax.plot_surface(xm, ym, f_low(xm, ym), color=color, alpha=0.3)</span>
+    <span class="c1"># ax.plot_surface(xm, ym, f_upp(xm, ym), color=color, alpha=0.3)</span>
+
+    <span class="c1"># Plot the full surface</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xymax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">xymax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plot_cube</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f_low</span><span class="p">,</span> <span class="n">f_upp</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">rcount</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ccount</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">color</span></div>
+
+
+
+<div class="viewcode-block" id="plot_cube">
+<a class="viewcode-back" href="../../../entrypoints/plotting.html#omc3.plotting.plot_amplitude_detuning.plot_cube">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_cube</span><span class="p">(</span><span class="n">ax</span><span class="p">:</span> <span class="n">Axes</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span> <span class="n">f_low</span><span class="p">:</span> <span class="nb">callable</span><span class="p">,</span> <span class="n">f_upp</span><span class="p">:</span> <span class="nb">callable</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plots a cube-like plot with f_low and f_upp as surfaces. &quot;&quot;&quot;</span>
+    <span class="c1"># lower</span>
+    <span class="n">xm</span><span class="p">,</span> <span class="n">ym</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">zm</span> <span class="o">=</span> <span class="n">f_low</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">ym</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">ym</span><span class="p">,</span> <span class="n">zm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># upper</span>
+    <span class="n">zm</span> <span class="o">=</span> <span class="n">f_upp</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">ym</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">ym</span><span class="p">,</span> <span class="n">zm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># north</span>
+    <span class="n">xm</span><span class="p">,</span> <span class="n">ym</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">]),</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)])</span>
+    <span class="n">zm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f_low</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">f_upp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">ym</span><span class="p">,</span> <span class="n">zm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># south</span>
+    <span class="n">xm</span><span class="p">,</span> <span class="n">ym</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">]),</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)])</span>
+    <span class="n">zm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f_low</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">f_upp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">ym</span><span class="p">,</span> <span class="n">zm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># east</span>
+    <span class="n">xm</span><span class="p">,</span> <span class="n">ym</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+    <span class="n">zm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f_low</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">),</span> <span class="n">f_upp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">)])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">ym</span><span class="p">,</span> <span class="n">zm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># west</span>
+    <span class="n">xm</span><span class="p">,</span> <span class="n">ym</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+    <span class="n">zm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f_low</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">),</span> <span class="n">f_upp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">)])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">ym</span><span class="p">,</span> <span class="n">zm</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_format_axes_3d</span><span class="p">(</span>
+        <span class="n">ax</span><span class="p">:</span> <span class="n">Axes</span><span class="p">,</span> <span class="n">limits</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">ax_labels</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">acd</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">odr_labels</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># labels</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">ax_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ax_labels</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="n">ax_labels</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># limits</span>
+    <span class="k">if</span> <span class="n">limits</span><span class="p">[</span><span class="s1">&#39;x_lim&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">limj</span> <span class="o">=</span> <span class="n">limits</span><span class="p">[</span><span class="s1">&#39;x_lim&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">limj</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">([</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]])]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">limj</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">limj</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">limits</span><span class="p">[</span><span class="s1">&#39;y_lim&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="s1">&#39;y_lim&#39;</span><span class="p">])</span>
+
+    <span class="c1"># pannot.make_top_legend(ax, ncol=2)</span>
+    <span class="k">if</span> <span class="n">acd</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text2D</span><span class="p">(</span>
+            <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="s2">&quot;* corrected for AC-Dipole.&quot;</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;x-small&quot;</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+            <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+            <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">get_labels_with_odr_labels</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">odr_labels</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">),</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="s1">&#39;small&#39;</span><span class="p">})</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">zaxis</span><span class="o">.</span><span class="n">_axinfo</span><span class="p">[</span><span class="s1">&#39;juggled&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># move tune axis to the other side</span>
+
+    <span class="c1"># tight layout so that the legend fits in figure</span>
+    <span class="c1"># We catch and ignore &#39;UserWarning: The figure layout has changed to tight&#39;</span>
+    <span class="c1"># because it is something we did on purpose, let&#39;s not pollute the output.</span>
+    <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+
+<span class="c1"># Labels -----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">_get_odr_label</span><span class="p">(</span><span class="n">odr_fit</span><span class="p">:</span> <span class="n">odr</span><span class="o">.</span><span class="n">Output</span><span class="p">,</span> <span class="n">tune_plane</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">action_plane</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                   <span class="n">action_unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">do_acd_correction</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns the label for the ODR fit, nicely formatted and scaled. &quot;&quot;&quot;</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">odr_fit</span><span class="o">.</span><span class="n">beta</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">str_list</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">order</span>
+    <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+        <span class="n">acd_correction</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">do_acd_correction</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">order</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">tune_plane</span> <span class="o">==</span> <span class="n">action_plane</span><span class="p">:</span>
+                <span class="n">acd_correction</span> <span class="o">=</span> <span class="mf">0.5</span>
+            <span class="k">if</span> <span class="n">order</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">tune_plane</span> <span class="o">==</span> <span class="n">action_plane</span><span class="p">:</span>
+                <span class="n">acd_correction</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span>
+
+        <span class="n">label</span> <span class="o">=</span> <span class="n">_get_scaled_odr_label</span><span class="p">(</span>
+            <span class="n">odr_fit</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="n">o</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">action_unit</span><span class="o">=</span><span class="n">action_unit</span><span class="p">,</span>
+            <span class="n">acd_correction</span><span class="o">=</span><span class="n">acd_correction</span><span class="p">,</span>
+            <span class="n">magnitude_exponent</span><span class="o">=</span><span class="n">const</span><span class="o">.</span><span class="n">get_detuning_exponent_for_order</span><span class="p">(</span><span class="n">o</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">order_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;^</span><span class="si">{</span><span class="n">o</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">o</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">str_list</span><span class="p">[</span><span class="n">o</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;$Q_</span><span class="se">{{</span><span class="si">{</span><span class="n">tune_plane</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">action_plane</span><span class="si">}{</span><span class="n">order_str</span><span class="si">}</span><span class="se">}}</span><span class="s2">$: </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">str_list</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_scaled_odr_label</span><span class="p">(</span><span class="n">odr_fit</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">action_unit</span><span class="p">,</span> <span class="n">acd_correction</span><span class="p">,</span> <span class="n">magnitude_exponent</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns the label for the ODR fit after scaling to readable units and accounting for AC-Dipole correction.&quot;&quot;&quot;</span>
+    <span class="n">str_acd_scale</span> <span class="o">=</span> <span class="s2">&quot;$^*$&quot;</span> <span class="k">if</span> <span class="n">acd_correction</span> <span class="o">!=</span> <span class="mi">1</span>  <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">acd_correction</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="o">-</span><span class="n">magnitude_exponent</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">UNIT_IN_METERS</span><span class="p">[</span><span class="n">action_unit</span><span class="p">]</span> <span class="o">**</span> <span class="n">order</span><span class="p">)</span>
+    <span class="n">str_val</span><span class="p">,</span> <span class="n">str_std</span> <span class="o">=</span> <span class="n">_get_scaled_labels</span><span class="p">(</span><span class="n">odr_fit</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="n">order</span><span class="p">],</span> <span class="n">odr_fit</span><span class="o">.</span><span class="n">sd_beta</span><span class="p">[</span><span class="n">order</span><span class="p">],</span> <span class="n">scale</span><span class="p">)</span>
+    <span class="n">str_mag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">magnitude_exponent</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">str_mag</span> <span class="o">=</span> <span class="sa">fr</span><span class="s1">&#39;$\cdot$ 10$^</span><span class="se">{{</span><span class="si">{</span><span class="n">magnitude_exponent</span><span class="si">}</span><span class="se">}}</span><span class="s1">$&#39;</span>
+    <span class="k">return</span> <span class="sa">fr</span><span class="s1">&#39;(</span><span class="si">{</span><span class="n">str_val</span><span class="si">}</span><span class="s1"> $\pm$ </span><span class="si">{</span><span class="n">str_std</span><span class="si">}</span><span class="s1">)</span><span class="si">{</span><span class="n">str_acd_scale</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">str_mag</span><span class="si">}</span><span class="s1"> m$^</span><span class="se">{{</span><span class="s1">-</span><span class="si">{</span><span class="n">order</span><span class="si">}</span><span class="se">}}</span><span class="s1">$&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">_get_scaled_labels</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">scale</span><span class="p">):</span>
+    <span class="n">scaled_vas</span><span class="p">,</span> <span class="n">scaled_std</span> <span class="o">=</span> <span class="n">val</span><span class="o">*</span><span class="n">scale</span><span class="p">,</span> <span class="n">std</span><span class="o">*</span><span class="n">scale</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">scaled_std</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">scaled_std</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">scaled_vas</span><span class="p">))</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">scaled_std</span><span class="p">))</span><span class="si">:</span><span class="s1">d</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="k">return</span> <span class="n">significant_digits</span><span class="p">(</span><span class="n">scaled_vas</span><span class="p">,</span> <span class="n">scaled_std</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">get_labels_with_odr_labels</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">odr_labels</span><span class="p">):</span>
+    <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">odr_labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span>
+
+    <span class="n">empty</span> <span class="o">=</span> <span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">h_new</span><span class="p">,</span> <span class="n">l_new</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">handle</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">odr_label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">odr_labels</span><span class="p">):</span>
+        <span class="n">h_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+        <span class="n">l_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">odr_label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">h_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">empty</span><span class="p">)</span>
+            <span class="n">l_new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">odr_label</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">h_new</span><span class="p">,</span> <span class="n">l_new</span>
+
+
+<span class="c1"># Helper -----------------------------------------------------------------------</span>
+
+<span class="k">def</span> <span class="nf">_save_options</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+        <span class="n">out_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
+        <span class="n">save_config</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="vm">__file__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_check_opt</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">bbq_corrected</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">bbq_corrected</span> <span class="o">=</span> <span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># loop both</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">bbq_corrected</span> <span class="o">=</span> <span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">bbq_corrected</span><span class="p">,)</span>  <span class="c1"># make iterable</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">kicks</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;kicks&#39; and &#39;labels&#39; need to be of same size!&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_default</span><span class="p">(</span><span class="n">ddict</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns ``default`` if either the dict itself or the entry is ``None``.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ddict</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ddict</span> <span class="ow">or</span> <span class="n">ddict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">default</span>
+    <span class="k">return</span> <span class="n">ddict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_scale_data</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">AmpDetData</span><span class="p">,</span> <span class="n">odr_fit</span><span class="p">:</span> <span class="n">odr</span><span class="o">.</span><span class="n">Output</span><span class="p">,</span>
+                <span class="n">action_unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">action_plot_unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tune_scale</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scale data to plot-units (y=tune_scale, x=um).&quot;&quot;&quot;</span>
+    <span class="n">x_scale</span> <span class="o">=</span> <span class="n">UNIT_IN_METERS</span><span class="p">[</span><span class="n">action_unit</span><span class="p">]</span> <span class="o">/</span> <span class="n">UNIT_IN_METERS</span><span class="p">[</span><span class="n">action_plot_unit</span><span class="p">]</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">action</span> <span class="o">*=</span> <span class="n">x_scale</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">action_err</span> <span class="o">*=</span> <span class="n">x_scale</span>
+
+    <span class="c1"># correct for tune scaling</span>
+    <span class="n">y_scale</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">tune_scale</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">tune</span> <span class="o">*=</span> <span class="n">y_scale</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">tune_err</span> <span class="o">*=</span> <span class="n">y_scale</span>
+
+    <span class="c1"># same for odr_fit:</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">odr_fit</span><span class="o">.</span><span class="n">beta</span><span class="p">)):</span>
+        <span class="n">full_scale</span> <span class="o">=</span> <span class="n">y_scale</span> <span class="o">/</span> <span class="p">(</span><span class="n">x_scale</span><span class="o">**</span><span class="n">idx</span><span class="p">)</span>
+        <span class="n">odr_fit</span><span class="o">.</span><span class="n">beta</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">*=</span> <span class="n">full_scale</span>
+        <span class="n">odr_fit</span><span class="o">.</span><span class="n">sd_beta</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">*=</span> <span class="n">full_scale</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">odr_fit</span>
+
+
+<span class="c1"># Script Mode ------------------------------------------------------------------</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+
+</pre></div>
+
+           </div>
+          </div>
+
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

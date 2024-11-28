@@ -1,0 +1,567 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Other &mdash; omc3 0.20.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=449bdd91" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=26ac6f1e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Plotting" href="plotting.html" />
+    <link rel="prev" title="Correction" href="correction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/omc_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Main Entrypoints</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis.html#hole-in-one">Hole in One</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis.html#amplitude-detuning-analysis">Amplitude Detuning Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="correction.html">Correction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="correction.html#global-correction">Global Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correction.html#response-creator">Response Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correction.html#correction-test">Correction Test</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Other</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tbt-converter">TbT Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-creator">Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#knob-extractor">Knob Extractor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mad-x-wrapper">MAD-X Wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-optics-measurements">Plot Optics Measurements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-tfs">Plot TFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-spectrum">Plot Spectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-correction-test">Plot Correction Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-amplitude-detuning-results">Plot Amplitude Detuning Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-k-modulation-results">Plot K-Modulation Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-bbq">Plot BBQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#betabeat-src-output-converter">BetaBeat.src Output Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#import-k-modulation-results">Import K-Modulation Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#k-mod-luminosity-imbalance">K-Mod Luminosity Imbalance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#update-natural-tune-in-lin-files">Update Natural Tune in Lin-Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#write-mad-x-macros">Write MAD-X Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#fake-measurement-from-model">Fake Measurement from Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#linfile-cleaning">Linfile Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#bad-bpms-summary">Bad BPMs Summary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/correction.html">Correction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#handler">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#model-appenders">Model Appenders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#model-diff">Model Diff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#response-mad-x">Response MAD-X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#response-twiss">Response TWISS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#sequence-evaluation">Sequence Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#response-matrix-io">Response Matrix IO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/definitions.html">Definitions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/definitions.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/definitions.html#formats">Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/harpy.html">Harpy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#clean">Clean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#frequency">Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#handler">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#kicker">Kicker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/model.html">Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#manager">Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#accelerator">Accelerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#esrf">ESRF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#lhc">LHC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps">PS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps-booster">PS Booster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#superkekb">SuperKEKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#iota">Iota</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#petra">PETRA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#lhc-model-creator">LHC Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps-model-creator">PS Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps-booster-model-creator">PS Booster Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#segment-creator">Segment Creator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/optics_measurements.html">Optics Measurements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#measure-optics">Measure Optics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#beta-from-amplitude">Beta from Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#beta-from-phase">Beta from Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#chromatic">Chromatic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#combined-rdts">Combined RDTs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#data-models">Data Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#dispersion">Dispersion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#dpp">Dpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#isolation-forest">Isolation Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#interaction-point">Interaction Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#kick">Kick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#phase-advance">Phase Advance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#resonance-driving-terms">Resonance Driving Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#toolbox">Toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#tune">Tune</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/plotting.html">Plot-Subfunctions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/plotting.html#optics-measurements-plots">Optics Measurements Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/plotting.html#spectrum-plots">Spectrum Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/plotting.html#common-plot-functionality">Common Plot Functionality</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/tune_analysis.html">Tune Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#bbq-tools">BBQ Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#fitting-tools">Fitting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#kick-file-modifiers">Kick File Modifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#timber-extraction">Timber Extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#contexts">Contexts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#io-tools">IO Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#logging-tools">Logging Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#mock">Mock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#outliers">Outliers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#stats">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#time-tools">Time Tools</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">omc3</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Other</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/pylhc/omc3" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <nav id="local-table-of-contents" role="navigation" aria-labelledby="local-table-of-contents-title">
+    <h4 id="local-table-of-contents-title">On This Page</h4>
+    <ul>
+<li><a class="reference internal" href="#">Other</a><ul>
+<li><a class="reference internal" href="#tbt-converter">TbT Converter</a></li>
+<li><a class="reference internal" href="#model-creator">Model Creator</a></li>
+<li><a class="reference internal" href="#knob-extractor">Knob Extractor</a></li>
+<li><a class="reference internal" href="#mad-x-wrapper">MAD-X Wrapper</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav>
+  
+  
+           <div itemprop="articleBody">
+             
+  <section id="other">
+<h1>Other<a class="headerlink" href="#other" title="Link to this heading"></a></h1>
+<section id="tbt-converter">
+<h2>TbT Converter<a class="headerlink" href="#tbt-converter" title="Link to this heading"></a></h2>
+<p>Top-level script to convert turn-by-turn files from various formats to <code class="docutils literal notranslate"><span class="pre">LHC</span></code> binary SDDS files.
+Optionally, it can replicate files with added noise.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.tbt_converter.</span></span><span class="sig-name descname"><span class="pre">converter_entrypoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/tbt_converter.html#converter_entrypoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Converts turn-by-turn files from various formats to <code class="docutils literal notranslate"><span class="pre">LHC</span></code> binary SDDS files.
+Optionally can replicate files with added noise.</p>
+<dl>
+<dt>Converter Kwargs:</dt><dd><ul>
+<li><p><strong>files</strong>: TbT files to convert</p>
+<p>Flags: <strong>--files</strong>
+Required: <code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+</li>
+<li><p><strong>outputdir</strong>: Output directory.</p>
+<p>Flags: <strong>--outputdir</strong>
+Required: <code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+</li>
+<li><p><strong>tbt_datatype</strong> <em>(str)</em>: Choose datatype from which to import (e.g LHC binary SDDS).</p>
+<p>Flags: <strong>--tbt_datatype</strong>
+Default: <code class="docutils literal notranslate"><span class="pre">lhc</span></code></p>
+</li>
+<li><p><strong>output_datatype</strong> <em>(str)</em>: Choose the datatype to export.</p>
+<p>Flags: <strong>--output_datatype</strong>
+Default: <code class="docutils literal notranslate"><span class="pre">lhc</span></code></p>
+</li>
+<li><p><strong>realizations</strong> <em>(int)</em>: Number of copies with added noise.</p>
+<p>Flags: <strong>--realizations</strong>
+Default: <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+</li>
+<li><p><strong>noise_levels</strong> <em>(float)</em>: Sigma of added Gaussian noise.</p>
+<p>Flags: <strong>--noise_levels</strong>
+Default: <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</li>
+<li><p><strong>use_average</strong> <em>(bool)</em>: If set, returned sdds only contains the average over all particle/bunches.</p>
+<p>Flags: <strong>--use_average</strong>
+Default: <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</li>
+<li><p><strong>drop_elements</strong>: Names of elements to drop from the input file during conversion.</p>
+<p>Flags: <strong>--drop_elements</strong>
+Default: <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="model-creator">
+<h2>Model Creator<a class="headerlink" href="#model-creator" title="Link to this heading"></a></h2>
+<p>Entrypoint to run the model creator for LHC, PSBooster and PS models.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.model_creator.</span></span><span class="sig-name descname"><span class="pre">create_instance_and_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accel_opt</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Accelerator</span></span></span><a class="reference internal" href="../_modules/omc3/model_creator.html#create_instance_and_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><dl>
+<dt>Manager Keyword Args:</dt><dd><p><em>--Required--</em></p>
+<ul>
+<li><p><strong>accel</strong>:</p>
+<blockquote>
+<div><p>Choose the accelerator to use.Can be the class already.</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">['lhc',</span> <span class="pre">'ps',</span> <span class="pre">'esrf',</span> <span class="pre">'psbooster',</span> <span class="pre">'skekb',</span> <span class="pre">'JPARC',</span> <span class="pre">'petra',</span> <span class="pre">'iota']</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt>Creator Keyword Args:</dt><dd><p><em>--Required--</em></p>
+<ul>
+<li><p><strong>outputdir</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Output path for model, twiss files will be writen here.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>logfile</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Path to the file where to write the MAD-X script output.If not
+provided it will be written to sys.stdout.</p>
+</div></blockquote>
+</li>
+<li><p><strong>type</strong>:</p>
+<blockquote>
+<div><p>Type of model to create.</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">('nominal',</span> <span class="pre">'best_knowledge',</span> <span class="pre">'coupling_correction')</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt>Accelerator Keyword Args:</dt><dd><p>lhc: <code class="xref py py-mod docutils literal notranslate"><span class="pre">omc3.model.accelerators.lhc</span></code></p>
+<p>ps: <code class="xref py py-mod docutils literal notranslate"><span class="pre">omc3.model.accelerators.ps</span></code></p>
+<p>esrf: <code class="xref py py-mod docutils literal notranslate"><span class="pre">omc3.model.accelerators.esrf</span></code></p>
+<p>psbooster: <code class="xref py py-mod docutils literal notranslate"><span class="pre">omc3.model.accelerators.psbooster</span></code></p>
+<p>skekb: <code class="xref py py-mod docutils literal notranslate"><span class="pre">omc3.model.accelerators.skekb</span></code></p>
+<p>iota: <code class="xref py py-mod docutils literal notranslate"><span class="pre">omc3.model.accelerators.iota</span></code></p>
+<p>petra: <code class="xref py py-mod docutils literal notranslate"><span class="pre">omc3.model.accelerators.petra</span></code> (not implemented)</p>
+<p>JPARC: Not implemented</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="knob-extractor">
+<h2>Knob Extractor<a class="headerlink" href="#knob-extractor" title="Link to this heading"></a></h2>
+<p>Entrypoint to extract knobs from <code class="docutils literal notranslate"><span class="pre">NXCALS</span></code> at a given time, and eventually write them out to a file.
+This script can also be used to display information about the StateTracker State.
+The data is fetched from <code class="docutils literal notranslate"><span class="pre">NXCALS</span></code> through <code class="docutils literal notranslate"><span class="pre">pytimber</span></code> using the <strong>StateTracker</strong> fields.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that access to the GPN is required to use this functionality.</p>
+</div>
+<p><strong>Arguments:</strong></p>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>knob_definitions</strong> <em>(PathOrStrOrDataFrame)</em>:</p>
+<blockquote>
+<div><p>User defined path to the knob-definitions, or (via python) a dataframe
+containing the knob definitions with the columns ‘madx’, ‘lsa’ and
+‘scaling’.</p>
+</div></blockquote>
+</li>
+<li><p><strong>knobs</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>A list of knob names or categories to extract. Available categories
+are: sep, xing, chroma, ip_offset, disp, mo.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">['sep',</span> <span class="pre">'xing',</span> <span class="pre">'chroma',</span> <span class="pre">'ip_offset',</span> <span class="pre">'disp',</span> <span class="pre">'mo']</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>output</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Specify user-defined output path. This should probably be
+<cite>model_dir/knobs.madx</cite></p>
+</div></blockquote>
+</li>
+<li><p><strong>state</strong>:</p>
+<blockquote>
+<div><p>Prints the state of the StateTracker. Does not extract anything else.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>time</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>At what time to extract the knobs. Accepts ISO-format (YYYY-MM-
+DDThh:mm:ss), timestamp or ‘now’. The default timezone for the ISO-
+format is local time, but you can force e.g. UTC by adding +00:00.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">now</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>timedelta</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Add this timedelta to the given time. The format of timedelta is
+‘((d+)(w))+’ with the second token being one of s(seconds),
+m(minutes), h(hours), d(days), w(weeks), M(months) e.g 7m = 7 minutes,
+1d = 1day, 7m30s = 7 min 30 secs. A prefix ‘_’ specifies a negative
+timedelta. This allows for easily getting the setting e.g. 2h ago:
+‘_2h’ while setting the <cite>time</cite> argument to ‘now’ (default).</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">omc3.knob_extractor.</span></span><span class="sig-name descname"><span class="pre">Col</span></span><a class="reference internal" href="../_modules/omc3/knob_extractor.html#Col"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>DataFrame Columns used in this script.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">omc3.knob_extractor.</span></span><span class="sig-name descname"><span class="pre">Head</span></span><a class="reference internal" href="../_modules/omc3/knob_extractor.html#Head"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>TFS Headers used in this script.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.knob_extractor.</span></span><span class="sig-name descname"><span class="pre">check_for_undefined_knobs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">knobs_definitions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pd.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">knob_categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/knob_extractor.html#check_for_undefined_knobs"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Check that all knobs are actually defined in the knobs-definitions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>knobs_definitions</strong> (<em>pd.DataFrame</em>) -- A mapping of all knob-names to KnobEntries.</p></li>
+<li><p><strong>knob_categories</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>) -- Knob Categories or Knob-Names to extract.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> -- If one or more of the knobs don’t have a definition.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.knob_extractor.</span></span><span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ldb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">knobs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/omc3/knob_extractor.html#extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Standalone function to gather data from  the StateTracker.
+Extracts data via pytimber’s LoggingDB for the knobs given
+(either by name or by category) in knobs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ldb</strong> (<em>pytimber.LoggingDB</em>) -- The pytimber database.</p></li>
+<li><p><strong>knobs</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>) -- Knob Categories or Knob-Names to extract.</p></li>
+<li><p><strong>time</strong> (<em>datetime</em>) -- The time, when to extract.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Contains all the extracted knobs.
+When extraction was not possible, the value is None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.knob_extractor.</span></span><span class="sig-name descname"><span class="pre">get_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ldb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/omc3/knob_extractor.html#get_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Standalone function to gather and log state data from  the StateTracker.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ldb</strong> (<em>pytimber.LoggingDB</em>) -- The pytimber database.</p></li>
+<li><p><strong>time</strong> (<em>datetime</em>) -- The time, when to get the state.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of state-variable and the extracted state value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.knob_extractor.</span></span><span class="sig-name descname"><span class="pre">load_knobs_definitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/knob_extractor.html#load_knobs_definitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Load the knobs-definition file and convert into a DataFrame.
+Each line in this file should consist of at least three comma separated
+entries in the following order: madx-name, lsa-name, scaling factor.
+Other columns are ignored.
+Alternatively, a TFS-file is also allowed, but needs to have the suffix <code class="docutils literal notranslate"><span class="pre">.tfs</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>Path</em>) -- Path to the knobs definition file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dataframe with LSA names (but with colon instead of /) as
+keys and KnobEntries (without values) as value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.knob_extractor.</span></span><span class="sig-name descname"><span class="pre">lsa2name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lsa_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/omc3/knob_extractor.html#lsa2name"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>LSA name -&gt; Variable in Timber/StateTracker conversion.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.knob_extractor.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/knob_extractor.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Main knob extracting function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.knob_extractor.</span></span><span class="sig-name descname"><span class="pre">name2lsa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/omc3/knob_extractor.html#name2lsa"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Variable in Timber/StateTracker -&gt; LSA name conversion.</p>
+</dd></dl>
+
+<section id="mad-x-wrapper">
+<h2>MAD-X Wrapper<a class="headerlink" href="#mad-x-wrapper" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">madx_wrapper</span></code> is high-level wrapper for running <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> codes within <code class="docutils literal notranslate"><span class="pre">omc3</span></code>.</p>
+<p>Usage: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">madx_wrapper.py</span> <span class="pre">--file</span> <span class="pre">your_madx_file.madx</span></code></p>
+</section>
+<dl class="py exception">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">omc3.madx_wrapper.</span></span><span class="sig-name descname"><span class="pre">MadxError</span></span><a class="reference internal" href="../_modules/omc3/madx_wrapper.html#MadxError"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.madx_wrapper.</span></span><span class="sig-name descname"><span class="pre">run_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">madx_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('/home/runner/work/omc3/omc3/omc3/bin/madx-linux64-gnu')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/madx_wrapper.html#run_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Runs <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> on a given script in a subprocess.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> -- <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> input file.</p></li>
+<li><p><strong>output_file</strong> -- If given writes <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> script.</p></li>
+<li><p><strong>log_file</strong> -- If given writes <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> logging output.</p></li>
+<li><p><strong>madx_path</strong> -- Path to the <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> executable.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.madx_wrapper.</span></span><span class="sig-name descname"><span class="pre">run_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">madx_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('/home/runner/work/omc3/omc3/omc3/bin/madx-linux64-gnu')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cwd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/madx_wrapper.html#run_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Runs <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> on a given string in a subprocess.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_string</strong> -- <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> input string.</p></li>
+<li><p><strong>output_file</strong> -- If given writes <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> script.</p></li>
+<li><p><strong>log_file</strong> -- If given writes <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> logging output.</p></li>
+<li><p><strong>madx_path</strong> -- Path to the <code class="docutils literal notranslate"><span class="pre">MAD-X</span></code> executable.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="correction.html" class="btn btn-neutral float-left" title="Correction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plotting.html" class="btn btn-neutral float-right" title="Plotting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Correction &mdash; omc3 0.20.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=449bdd91" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=26ac6f1e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Other" href="other.html" />
+    <link rel="prev" title="Analysis" href="analysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/omc_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Main Entrypoints</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis.html#hole-in-one">Hole in One</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis.html#amplitude-detuning-analysis">Amplitude Detuning Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Correction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#global-correction">Global Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#response-creator">Response Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#correction-test">Correction Test</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="other.html#tbt-converter">TbT Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other.html#model-creator">Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other.html#knob-extractor">Knob Extractor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other.html#mad-x-wrapper">MAD-X Wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-optics-measurements">Plot Optics Measurements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-tfs">Plot TFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-spectrum">Plot Spectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-correction-test">Plot Correction Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-amplitude-detuning-results">Plot Amplitude Detuning Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-k-modulation-results">Plot K-Modulation Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-bbq">Plot BBQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#betabeat-src-output-converter">BetaBeat.src Output Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#import-k-modulation-results">Import K-Modulation Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#k-mod-luminosity-imbalance">K-Mod Luminosity Imbalance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#update-natural-tune-in-lin-files">Update Natural Tune in Lin-Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#write-mad-x-macros">Write MAD-X Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#fake-measurement-from-model">Fake Measurement from Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#linfile-cleaning">Linfile Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scripts.html#bad-bpms-summary">Bad BPMs Summary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/correction.html">Correction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#handler">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#model-appenders">Model Appenders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#model-diff">Model Diff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#response-mad-x">Response MAD-X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#response-twiss">Response TWISS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#sequence-evaluation">Sequence Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#response-matrix-io">Response Matrix IO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/definitions.html">Definitions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/definitions.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/definitions.html#formats">Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/harpy.html">Harpy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#clean">Clean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#frequency">Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#handler">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#kicker">Kicker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/model.html">Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#manager">Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#accelerator">Accelerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#esrf">ESRF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#lhc">LHC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps">PS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps-booster">PS Booster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#superkekb">SuperKEKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#iota">Iota</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#petra">PETRA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#lhc-model-creator">LHC Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps-model-creator">PS Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps-booster-model-creator">PS Booster Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#segment-creator">Segment Creator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/optics_measurements.html">Optics Measurements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#measure-optics">Measure Optics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#beta-from-amplitude">Beta from Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#beta-from-phase">Beta from Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#chromatic">Chromatic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#combined-rdts">Combined RDTs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#data-models">Data Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#dispersion">Dispersion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#dpp">Dpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#isolation-forest">Isolation Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#interaction-point">Interaction Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#kick">Kick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#phase-advance">Phase Advance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#resonance-driving-terms">Resonance Driving Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#toolbox">Toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#tune">Tune</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/plotting.html">Plot-Subfunctions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/plotting.html#optics-measurements-plots">Optics Measurements Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/plotting.html#spectrum-plots">Spectrum Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/plotting.html#common-plot-functionality">Common Plot Functionality</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/tune_analysis.html">Tune Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#bbq-tools">BBQ Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#fitting-tools">Fitting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#kick-file-modifiers">Kick File Modifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#timber-extraction">Timber Extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#contexts">Contexts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#io-tools">IO Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#logging-tools">Logging Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#mock">Mock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#outliers">Outliers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#stats">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#time-tools">Time Tools</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">omc3</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Correction</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/pylhc/omc3" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <nav id="local-table-of-contents" role="navigation" aria-labelledby="local-table-of-contents-title">
+    <h4 id="local-table-of-contents-title">On This Page</h4>
+    <ul>
+<li><a class="reference internal" href="#">Correction</a><ul>
+<li><a class="reference internal" href="#global-correction">Global Correction</a></li>
+<li><a class="reference internal" href="#response-creator">Response Creator</a></li>
+<li><a class="reference internal" href="#correction-test">Correction Test</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav>
+  
+  
+           <div itemprop="articleBody">
+             
+  <section id="correction">
+<h1>Correction<a class="headerlink" href="#correction" title="Link to this heading"></a></h1>
+<section id="global-correction">
+<h2>Global Correction<a class="headerlink" href="#global-correction" title="Link to this heading"></a></h2>
+<p>Iterative Correction Scheme.</p>
+<p>The response matrices <span class="math notranslate nohighlight">\(R_{O}\)</span> for the observables <span class="math notranslate nohighlight">\(O\)</span> (e.g. BBX, PHASEX, …)
+are loaded from a file and then the equation</p>
+<div class="math notranslate nohighlight" id="equation-eq1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq1" title="Link to this equation"></a></span>\[R_{O} \cdot \delta var = O_{meas} - O_{model}\]</div>
+<p>is being solved for <span class="math notranslate nohighlight">\(\delta var\)</span> via a chosen method (at the moment only numpys pinv,
+which creates a pseudo-inverse via svd is used).</p>
+<p>The response matrices are hereby merged into one matrix for all observables to solve for all
+<span class="math notranslate nohighlight">\(\delta var\)</span> at the same time.</p>
+<p>To normalize the observables to another <code class="docutils literal notranslate"><span class="pre">weights</span></code> (W) can be applied.</p>
+<p>Furthermore, an <code class="docutils literal notranslate"><span class="pre">errorcut</span></code>, specifying the maximum errorbar for a BPM to be used, and
+<code class="docutils literal notranslate"><span class="pre">modelcut</span></code>, specifying the maximum distance between measurement and model for a BPM to be used,
+can be defined. Data from BPMs outside of those cut-values will be discarded.
+These cuts are defined for each observable separately.</p>
+<p>After each iteration the model variables are changed by <span class="math notranslate nohighlight">\(-\delta var\)</span> and the
+observables are recalculated by Mad-X.
+<a class="reference internal" href="#equation-eq1">(1)</a> is then solved again.</p>
+<p>Input arguments are split into correction arguments and accelerator arguments.
+The former are listed below, the latter depend on the accelerator you want
+to use. Check <a class="reference internal" href="../modules/model.html#model"><span class="std std-ref">Model</span></a> to see which ones are needed.</p>
+<p><strong>Arguments:</strong></p>
+<p><em>--Required--</em></p>
+<ul>
+<li><p><strong>meas_dir</strong>:</p>
+<blockquote>
+<div><p>Path to the directory containing the measurement files.</p>
+</div></blockquote>
+</li>
+<li><p><strong>output_dir</strong>:</p>
+<blockquote>
+<div><p>Path to the directory where to write the output files.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>beta_filename</strong>:</p>
+<blockquote>
+<div><p>Prefix of the beta file to use. E.g.: getkmodbeta</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">beta_phase_</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>errorcut</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Reject BPMs whose error bar is higher than the corresponding input.
+Input in order of optics_params.</p>
+</div></blockquote>
+</li>
+<li><p><strong>fullresponse_path</strong>:</p>
+<blockquote>
+<div><p>Path to the fullresponse binary file. If not given, calculates the
+response analytically.</p>
+</div></blockquote>
+</li>
+<li><p><strong>max_iter</strong> <em>(int)</em>:</p>
+<blockquote>
+<div><p>Maximum number of correction re-iterations to perform. A value of <cite>0</cite>
+means the correction is calculated once.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>method</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Optimization method to use.</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">('pinv',</span> <span class="pre">'omp')</span></code></p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">pinv</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>min_corrector_strength</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Minimum (absolute) strength of correctors.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">0.0</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>modelcut</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Reject BPMs whose deviation to the model is higher than the
+corresponding input. Input in order of optics_params.</p>
+</div></blockquote>
+</li>
+<li><p><strong>n_correctors</strong> <em>(int)</em>:</p>
+<blockquote>
+<div><p>Maximum number of correctors to use. (Method: ‘omp’)</p>
+</div></blockquote>
+</li>
+<li><p><strong>optics_params</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>List of parameters to correct upon (e.g. BETX BETY)</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">('PHASEX',</span> <span class="pre">'PHASEY',</span> <span class="pre">'BETX',</span> <span class="pre">'BETY',</span> <span class="pre">'DX',</span> <span class="pre">'DY',</span> <span class="pre">'NDX',</span> <span class="pre">'Q',</span> <span class="pre">'F1001R',</span> <span class="pre">'F1001I',</span> <span class="pre">'F1010R',</span> <span class="pre">'F1010I')</span></code></p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">['PHASEX',</span> <span class="pre">'PHASEY',</span> <span class="pre">'BETX',</span> <span class="pre">'BETY',</span> <span class="pre">'NDX',</span> <span class="pre">'Q']</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>output_filename</strong>:</p>
+<blockquote>
+<div><p>Identifier of the output files.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">changeparameters_iter</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>svd_cut</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Cutoff for small singular values of the pseudo inverse. (Method:
+‘pinv’)Singular values smaller than rcond*largest_singular_value are
+set to zero</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">0.01</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>update_response</strong>:</p>
+<blockquote>
+<div><p>Update the (analytical) response per iteration.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>use_errorbars</strong>:</p>
+<blockquote>
+<div><p>Take into account the measured errorbars in the correction.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>variable_categories</strong>:</p>
+<blockquote>
+<div><p>List of names of the variables classes to use.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">['MQM',</span> <span class="pre">'MQT',</span> <span class="pre">'MQTL',</span> <span class="pre">'MQY']</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>weights</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Weight to apply to each measured quantity. Input in order of
+optics_params.</p>
+</div></blockquote>
+</li>
+</ul>
+<dl class="simple">
+<dt>Possible problems and notes (lmalina, 2020):</dt><dd><ul class="simple">
+<li><p>error-based weights default? likely - but be careful with low tune errors vs svd cut in pseudoinverse</p></li>
+<li><p>manual creation of pd.DataFrame varslist, deltas? maybe tunes in tfs_pandas single value or a column?</p></li>
+<li><p>There should be some summation/renaming for iterations</p></li>
+<li><p>For two beam correction</p></li>
+<li><p>The two beams can be treated separately until the calculation of correction</p></li>
+<li><p>Values missing in the response (i.e. correctors of the other beam) shall be treated as zeros</p></li>
+<li><p>Missing a part that treats the output from LSA</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.global_correction.</span></span><span class="sig-name descname"><span class="pre">global_correction_entrypoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DotDict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accel_opt</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/global_correction.html#global_correction_entrypoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Do the global correction. Iteratively.</p>
+</dd></dl>
+
+<section id="response-creator">
+<h2>Response Creator<a class="headerlink" href="#response-creator" title="Link to this heading"></a></h2>
+<p>Provides a response generation wrapper.
+The response matrices can be either created by <code class="xref py py-mod docutils literal notranslate"><span class="pre">omc3.correction.response_madx</span></code>
+or analytically via <code class="xref py py-mod docutils literal notranslate"><span class="pre">omc3.correction.response_twiss</span></code>.</p>
+<p>Input arguments are split into response creation arguments and accelerator arguments.
+The former are listed below, the latter depend on the accelerator you want
+to use. Check <a class="reference internal" href="../modules/model.html#model"><span class="std std-ref">Model</span></a> to see which ones are needed.</p>
+<p><strong>Arguments:</strong></p>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>outfile_path</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Name of fullresponse file.</p>
+</div></blockquote>
+</li>
+<li><p><strong>creator</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Create either with madx or analytically from twiss file.</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">('madx',</span> <span class="pre">'twiss')</span></code></p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">madx</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>debug</strong>:</p>
+<blockquote>
+<div><p>Print debug information.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>delta_k</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Delta K1 to be applied to quads for sensitivity matrix (madx-only).</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">2e-05</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>optics_params</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>List of parameters to correct upon (e.g. BBX BBY; twiss-only).</p>
+</div></blockquote>
+</li>
+<li><p><strong>variable_categories</strong>:</p>
+<blockquote>
+<div><p>List of the variables classes to use.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">['MQM',</span> <span class="pre">'MQT',</span> <span class="pre">'MQTL',</span> <span class="pre">'MQY']</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.response_creator.</span></span><span class="sig-name descname"><span class="pre">create_response_entrypoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DotDict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_opt</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/omc3/response_creator.html#create_response_entrypoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Entry point for creating pandas-based response matrices.</p>
+<p>The response matrices can be either created by response_madx or TwissResponse.</p>
+</dd></dl>
+
+<section id="correction-test">
+<h2>Correction Test<a class="headerlink" href="#correction-test" title="Link to this heading"></a></h2>
+<p>In a MAD-X simulation (pre-calculated) corrections are applied to the (nominal)
+model and the difference between this new matched model and the nominal model
+are evaluated. These are the changes in the optics parameters as
+expected from the corrections and are later subtracted from the original
+model-measurement DELTA (see below).
+In new folders, either the given output folder or sub-folders,
+based on the name of the correction applied, the measurement data will be
+written out into the standard optics tfs-files with three additional columns:</p>
+<dl class="simple">
+<dt>DIFF-column:</dt><dd><p>Difference between the corrected and uncorrected model,
+i.e. the expected correction influence (with inverted sign).
+The beta-diff is beta-beating.
+The difference normalized-dispersion is also properly calculated.</p>
+</dd>
+<dt>EXP-column :</dt><dd><p>This column is calculated by subtracting the DIFF-column
+from the original DELTA-column (i.e. the difference between
+measurement and model) and is therefore the
+expected difference of model and measurement (i.e.
+DELTA-Measurement) after correction.
+For beta-beating this might be only approximate
+as it assumes, that the model used to calculate
+the DELTA-columns in the measurement and the
+nominal model used for the corrections are identical
+(if e.g. best-knowledge model is used, the
+expectation is only approximate).</p>
+</dd>
+<dt>ERREXP-column:</dt><dd><p>This is the error on the EXP-column.
+This is the measurement error in most cases,
+apart from in beta and normalized dispersion,
+where we account for beating and normalization.</p>
+</dd>
+</dl>
+<p>There will also be the RMS values of the DIFF and EXP columns
+in the headers of the files.
+If error- and/or measurement cuts were given, additional RMS headers
+will be present, taking these cuts into account.
+This is the only use for the given cuts and optics parameters.</p>
+<p>If plotting is activated, also plots for each correction (DIFFerence and EXPected) as
+well as a plot for all corrections (only EXPected) will be saved into the output folder(s).</p>
+<p><strong>Arguments:</strong></p>
+<p><em>--Required--</em></p>
+<ul>
+<li><p><strong>corrections</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Paths to the correction files/directories to use. If files are given,
+these will all be applied as corrections at the same time. If folders
+are given, these are assumed to individually containing the correction
+files. See then also <code class="docutils literal notranslate"><span class="pre">file_pattern</span></code>.</p>
+</div></blockquote>
+</li>
+<li><p><strong>meas_dir</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Path to the directory containing the measurement files.</p>
+</div></blockquote>
+</li>
+<li><p><strong>output_dir</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Path to the directory where to write the output files. If the
+<code class="docutils literal notranslate"><span class="pre">corrections</span></code> input consists of multiple folders, their name will be
+used to sort the output data into subfolders.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>beta_filename</strong>:</p>
+<blockquote>
+<div><p>Prefix of the beta file to use. E.g.: <code class="docutils literal notranslate"><span class="pre">beta_phase_</span></code></p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">beta_phase_</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>change_marker</strong>:</p>
+<blockquote>
+<div><p>Changes marker for each line in the plot.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>combine_by</strong>:</p>
+<blockquote>
+<div><p>Combine plots into one. Either files, planes (not separated into two
+axes) or both.</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">['files',</span> <span class="pre">'planes']</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>errorbar_alpha</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Alpha value for error bars</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">0.6</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>errorcut</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Reject BPMs whose error bar is higher than the corresponding input.
+Input in order of optics_params.</p>
+</div></blockquote>
+</li>
+<li><p><strong>file_pattern</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Filepattern to use to find correction files in folders (as regex).</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">^changeparameters*?\.madx$</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>individual_to_input</strong>:</p>
+<blockquote>
+<div><p>Save plots for the individual corrections into the corrections input
+folders. Otherwise they go with suffix into the output_folders.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>ip_positions</strong>:</p>
+<blockquote>
+<div><p>Input to plot IP-Positions into the plots. Either ‘LHCB1’ or ‘LHCB2’
+for LHC defaults, a dictionary of labels and positions or path to TFS
+file of a model.</p>
+</div></blockquote>
+</li>
+<li><p><strong>ip_search_pattern</strong>:</p>
+<blockquote>
+<div><p>In case your IPs have a weird name. Specify regex pattern.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">IP\d$</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>lines_manual</strong> <em>(DictAsString)</em>:</p>
+<blockquote>
+<div><p>List of manual lines to plot. Need to contain arguments for axvline,
+and may contain the additional keys “text” and “loc” which is one of
+[‘bottom’, ‘top’, ‘line bottom’, ‘line top’] and places the text at
+the given location.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>manual_style</strong> <em>(DictAsString)</em>:</p>
+<blockquote>
+<div><p>Additional style rcParameters which update the set of predefined ones.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">{}</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>modelcut</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Reject BPMs whose deviation to the model is higher than the
+corresponding input. Input in order of optics_params.</p>
+</div></blockquote>
+</li>
+<li><p><strong>ncol_legend</strong> <em>(int)</em>:</p>
+<blockquote>
+<div><p>Number of bpm legend-columns. If &lt; 1 no legend is shown.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">3</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>optics_params</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>List of parameters for which the cuts should be applied (e.g. BETX
+BETY)</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">('PHASEX',</span> <span class="pre">'PHASEY',</span> <span class="pre">'BETX',</span> <span class="pre">'BETY',</span> <span class="pre">'NDX',</span> <span class="pre">'Q',</span> <span class="pre">'DX',</span> <span class="pre">'DY',</span> <span class="pre">'F1001R',</span> <span class="pre">'F1001I',</span> <span class="pre">'F1010R',</span> <span class="pre">'F1010I')</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>plot</strong>:</p>
+<blockquote>
+<div><p>Activate plotting.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>plot_styles</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Which plotting styles to use, either from plotting.styles.*.mplstyles
+or default mpl.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">['standard',</span> <span class="pre">'correction_test']</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>share_xaxis</strong>:</p>
+<blockquote>
+<div><p>In case of multiple axes per figure, share x-axis.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>show</strong>:</p>
+<blockquote>
+<div><p>Shows plots.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>suppress_column_legend</strong>:</p>
+<blockquote>
+<div><p>Does not show column name in legend e.g. when combining by files (see
+also <cite>ncol_legend</cite>).</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>x_axis</strong>:</p>
+<blockquote>
+<div><p>Which parameter to use for the x axis.</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">['location',</span> <span class="pre">'phase-advance']</span></code></p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">location</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>x_lim</strong> <em>(MultiClass)</em>:</p>
+<blockquote>
+<div><p>Limits on the x axis (Tupel)</p>
+</div></blockquote>
+</li>
+<li><p><strong>y_lim</strong> <em>(MultiClass)</em>:</p>
+<blockquote>
+<div><p>Limits on the y axis (Tupel)</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.check_corrections.</span></span><span class="sig-name descname"><span class="pre">correction_test_entrypoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DotDict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accel_opt</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/check_corrections.html#correction_test_entrypoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Entrypoint function to test the given corrections.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Instead of writing everything out, it could return
+dictionaries of the TFSDataFrames and Figures.
+But I don’t see a usecase at the moment (jdilly 2023)</p>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="analysis.html" class="btn btn-neutral float-left" title="Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="other.html" class="btn btn-neutral float-right" title="Other" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1134 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scripts &mdash; omc3 0.20.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=449bdd91" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=26ac6f1e"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Correction" href="../modules/correction.html" />
+    <link rel="prev" title="Plotting" href="plotting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/omc_logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Main Entrypoints</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="analysis.html#hole-in-one">Hole in One</a></li>
+<li class="toctree-l2"><a class="reference internal" href="analysis.html#amplitude-detuning-analysis">Amplitude Detuning Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="correction.html">Correction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="correction.html#global-correction">Global Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correction.html#response-creator">Response Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correction.html#correction-test">Correction Test</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="other.html">Other</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="other.html#tbt-converter">TbT Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other.html#model-creator">Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other.html#knob-extractor">Knob Extractor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other.html#mad-x-wrapper">MAD-X Wrapper</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-optics-measurements">Plot Optics Measurements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-tfs">Plot TFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-spectrum">Plot Spectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-correction-test">Plot Correction Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-amplitude-detuning-results">Plot Amplitude Detuning Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-k-modulation-results">Plot K-Modulation Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plotting.html#plot-bbq">Plot BBQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#betabeat-src-output-converter">BetaBeat.src Output Converter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#import-k-modulation-results">Import K-Modulation Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#k-mod-luminosity-imbalance">K-Mod Luminosity Imbalance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update-natural-tune-in-lin-files">Update Natural Tune in Lin-Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write-mad-x-macros">Write MAD-X Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fake-measurement-from-model">Fake Measurement from Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linfile-cleaning">Linfile Cleaning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bad-bpms-summary">Bad BPMs Summary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules/correction.html">Correction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#handler">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#model-appenders">Model Appenders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#model-diff">Model Diff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#response-mad-x">Response MAD-X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#response-twiss">Response TWISS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#sequence-evaluation">Sequence Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/correction.html#response-matrix-io">Response Matrix IO</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/definitions.html">Definitions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/definitions.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/definitions.html#formats">Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/harpy.html">Harpy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#clean">Clean</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#frequency">Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#handler">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/harpy.html#kicker">Kicker</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/model.html">Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#manager">Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#accelerator">Accelerator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#esrf">ESRF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#lhc">LHC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps">PS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps-booster">PS Booster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#superkekb">SuperKEKB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#iota">Iota</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#petra">PETRA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#lhc-model-creator">LHC Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps-model-creator">PS Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#ps-booster-model-creator">PS Booster Model Creator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/model.html#segment-creator">Segment Creator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/optics_measurements.html">Optics Measurements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#measure-optics">Measure Optics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#beta-from-amplitude">Beta from Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#beta-from-phase">Beta from Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#chromatic">Chromatic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#combined-rdts">Combined RDTs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#data-models">Data Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#dispersion">Dispersion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#dpp">Dpp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#isolation-forest">Isolation Forest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#interaction-point">Interaction Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#kick">Kick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#phase-advance">Phase Advance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#resonance-driving-terms">Resonance Driving Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#toolbox">Toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/optics_measurements.html#tune">Tune</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/plotting.html">Plot-Subfunctions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/plotting.html#optics-measurements-plots">Optics Measurements Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/plotting.html#spectrum-plots">Spectrum Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/plotting.html#common-plot-functionality">Common Plot Functionality</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/tune_analysis.html">Tune Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#bbq-tools">BBQ Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#fitting-tools">Fitting Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#kick-file-modifiers">Kick File Modifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/tune_analysis.html#timber-extraction">Timber Extraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#contexts">Contexts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#io-tools">IO Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#logging-tools">Logging Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#mock">Mock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#outliers">Outliers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#stats">Stats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/utils.html#time-tools">Time Tools</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">omc3</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Scripts</li>
+      <li class="wy-breadcrumbs-aside">
+              <!-- User defined GitHub URL -->
+              <a href="https://github.com/pylhc/omc3" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <nav id="local-table-of-contents" role="navigation" aria-labelledby="local-table-of-contents-title">
+    <h4 id="local-table-of-contents-title">On This Page</h4>
+    <ul>
+<li><a class="reference internal" href="#">Scripts</a><ul>
+<li><a class="reference internal" href="#betabeat-src-output-converter">BetaBeat.src Output Converter</a></li>
+<li><a class="reference internal" href="#import-k-modulation-results">Import K-Modulation Results</a></li>
+<li><a class="reference internal" href="#k-mod-luminosity-imbalance">K-Mod Luminosity Imbalance</a></li>
+<li><a class="reference internal" href="#update-natural-tune-in-lin-files">Update Natural Tune in Lin-Files</a></li>
+<li><a class="reference internal" href="#write-mad-x-macros">Write MAD-X Macros</a></li>
+<li><a class="reference internal" href="#fake-measurement-from-model">Fake Measurement from Model</a></li>
+<li><a class="reference internal" href="#linfile-cleaning">Linfile Cleaning</a></li>
+<li><a class="reference internal" href="#bad-bpms-summary">Bad BPMs Summary</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav>
+  
+  
+           <div itemprop="articleBody">
+             
+  <section id="scripts">
+<h1>Scripts<a class="headerlink" href="#scripts" title="Link to this heading"></a></h1>
+<section id="betabeat-src-output-converter">
+<h2>BetaBeat.src Output Converter<a class="headerlink" href="#betabeat-src-output-converter" title="Link to this heading"></a></h2>
+<p>Script to convert most important output files produced by <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> / <code class="docutils literal notranslate"><span class="pre">GetLLM</span></code> into the standard
+format used in <code class="docutils literal notranslate"><span class="pre">omc3</span></code> to allow straight forward comparison of the two.</p>
+<p>Good to know: in <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> the <code class="docutils literal notranslate"><span class="pre">_free</span></code> files correspond to AC dipole (or ADT-AC dipole)
+compensation by analytic equation while <code class="docutils literal notranslate"><span class="pre">_free2</span></code> corresponds to compensation via effective model. It is
+written in GetLLM (at least once) here: <a class="reference external" href="https://github.com/pylhc/Beta-Beat.src/blob/63c5e39f63b03c00d18289cc9813a912fa6b933f/GetLLM/GetLLM.py#L606">https://github.com/pylhc/Beta-Beat.src/blob/63c5e39f63b03c00d18289cc9813a912fa6b933f/GetLLM/GetLLM.py#L606</a></p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.betabeatsrc_output_converter.</span></span><span class="sig-name descname"><span class="pre">convert_old_beta_from_amplitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ampbeta'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'beta_amplitude_'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/betabeatsrc_output_converter.html#convert_old_beta_from_amplitude"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Looks in the provided directory for expected beta from amplitude file from <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> for a given
+plane, converts it to the output format used by <code class="docutils literal notranslate"><span class="pre">omc3</span></code> and  write them to the new location.</p>
+<p>The file naming should be getampbeta(x,y).out, with the following expected columns: NAME, S, COUNT,
+BETX, BETXSTD, BETXMDL, MUXMDL, BETXRES, BETXSTDRES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the directory with BetaBeat.src output files.</p></li>
+<li><p><strong>outputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the output directory for converted files.</p></li>
+<li><p><strong>suffix</strong> (<em>str</em>) -- Compensation suffix used in the provided BetaBeat.src output files.</p></li>
+<li><p><strong>plane</strong> (<em>str</em>) -- the transverse plane for which to look for the output file.</p></li>
+<li><p><strong>old_file_name</strong> (<em>str</em>) -- the standard naming for the old output file.</p></li>
+<li><p><strong>new_file_name</strong> (<em>str</em>) -- the standard naming for the new converted file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.betabeatsrc_output_converter.</span></span><span class="sig-name descname"><span class="pre">convert_old_beta_from_phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'beta'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'beta_phase_'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/betabeatsrc_output_converter.html#convert_old_beta_from_phase"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Looks in the provided directory for expected beta from phase file from <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> for a given
+plane, converts it to the output format used by <code class="docutils literal notranslate"><span class="pre">omc3</span></code> and  write them to the new location.</p>
+<p>The file naming should be getbeta(x,y).out, with the following expected columns: NAME, S, COUNT,
+BETX, SYSBETX, STATBETX, ERRBETX, CORR_ALFABETA, ALFX, SYSALFX, STATALFX, ERRALFX, BETXMDL, ALFXMDL,
+MUXMDL, NCOMBINATIONS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the directory with BetaBeat.src output files.</p></li>
+<li><p><strong>outputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the output directory for converted files.</p></li>
+<li><p><strong>suffix</strong> (<em>str</em>) -- Compensation suffix used in the provided BetaBeat.src output files.</p></li>
+<li><p><strong>plane</strong> (<em>str</em>) -- the transverse plane for which to look for the output file.</p></li>
+<li><p><strong>old_file_name</strong> (<em>str</em>) -- the standard naming for the old output file.</p></li>
+<li><p><strong>new_file_name</strong> (<em>str</em>) -- the standard naming for the new converted file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.betabeatsrc_output_converter.</span></span><span class="sig-name descname"><span class="pre">convert_old_closed_orbit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'CO'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'orbit_'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/betabeatsrc_output_converter.html#convert_old_closed_orbit"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Looks in the provided directory for expected closed orbit file from <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> for a given
+plane, converts it to the output format used by <code class="docutils literal notranslate"><span class="pre">omc3</span></code> and  write them to the new location.</p>
+<p>The file naming should be getCO(x,y).out, with the following expected columns: NAME, S, COUNT,
+X, STDX, XMDL, MUXMDL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the directory with BetaBeat.src output files.</p></li>
+<li><p><strong>outputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the output directory for converted files.</p></li>
+<li><p><strong>plane</strong> (<em>str</em>) -- the transverse plane for which to look for the output file.</p></li>
+<li><p><strong>old_file_name</strong> (<em>str</em>) -- the standard naming for the old output file.</p></li>
+<li><p><strong>new_file_name</strong> (<em>str</em>) -- the standard naming for the new converted file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.betabeatsrc_output_converter.</span></span><span class="sig-name descname"><span class="pre">convert_old_coupling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'couple'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'f'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/betabeatsrc_output_converter.html#convert_old_coupling"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Looks in the provided directory for expected coupling file from <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code>, converts it to the
+output format used by <code class="docutils literal notranslate"><span class="pre">omc3</span></code> and  write them to the new location.</p>
+<p>The file naming should be getcouple(x,y).out, with the following expected columns: NAME, S, COUNT,
+F1001W, FWSTD1, F1001R, F1001I, F1010W, FWSTD2, F1010R, F1010I, Q1001, Q1001STD, Q1010, Q1010STD,
+MDLF1001R, MDLF1001I, MDLF1010R, MDLF1010I.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the directory with BetaBeat.src output files.</p></li>
+<li><p><strong>outputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the output directory for converted files.</p></li>
+<li><p><strong>suffix</strong> (<em>str</em>) -- Compensation suffix used in the provided BetaBeat.src output files.</p></li>
+<li><p><strong>old_file_name</strong> (<em>str</em>) -- the standard naming for the old output file.</p></li>
+<li><p><strong>new_file_name</strong> (<em>str</em>) -- the standard naming for the new converted file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.betabeatsrc_output_converter.</span></span><span class="sig-name descname"><span class="pre">convert_old_directory_to_new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DotDict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/betabeatsrc_output_converter.html#convert_old_directory_to_new"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Looks in the provided directory for expected <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> output files, converts it to the output
+format used by <code class="docutils literal notranslate"><span class="pre">omc3</span></code> and  write them to the new location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>opt</strong> (<em>DotDict</em>) -- The entrypoint parameters parsed from the command line.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.betabeatsrc_output_converter.</span></span><span class="sig-name descname"><span class="pre">convert_old_dispersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'D'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'dispersion_'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/betabeatsrc_output_converter.html#convert_old_dispersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Looks in the provided directory for expected dispersion file from <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> for a given
+plane, converts it to the output format used by <code class="docutils literal notranslate"><span class="pre">omc3</span></code> and  write them to the new location.</p>
+<p>The file naming should be getD(x,y).out, with the following expected columns: NAME, S, COUNT, DX,
+STDDX, DPX, DXMDL, DPXMDL, MUXMDL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the directory with BetaBeat.src output files.</p></li>
+<li><p><strong>outputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the output directory for converted files.</p></li>
+<li><p><strong>plane</strong> (<em>str</em>) -- the transverse plane for which to look for the output file.</p></li>
+<li><p><strong>old_file_name</strong> (<em>str</em>) -- the standard naming for the old output file.</p></li>
+<li><p><strong>new_file_name</strong> (<em>str</em>) -- the standard naming for the new converted file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.betabeatsrc_output_converter.</span></span><span class="sig-name descname"><span class="pre">convert_old_normalised_dispersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'ND'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'normalised_dispersion_'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/betabeatsrc_output_converter.html#convert_old_normalised_dispersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Looks in the provided directory for expected normalized dispersion file from <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> for a
+given plane, converts it to the output format used by <code class="docutils literal notranslate"><span class="pre">omc3</span></code> and  write them to the new location.</p>
+<p>The file naming should be getND(x,y).out, with the following expected columns: NAME, S, COUNT, NDX,
+STDNDX, DX, DPX, NDXMDL, DXMDL, DPXMDL, MUXMDL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the directory with BetaBeat.src output files.</p></li>
+<li><p><strong>outputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the output directory for converted files.</p></li>
+<li><p><strong>plane</strong> (<em>str</em>) -- the transverse plane for which to look for the output file.</p></li>
+<li><p><strong>old_file_name</strong> (<em>str</em>) -- the standard naming for the old output file.</p></li>
+<li><p><strong>new_file_name</strong> (<em>str</em>) -- the standard naming for the new converted file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.betabeatsrc_output_converter.</span></span><span class="sig-name descname"><span class="pre">convert_old_phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'phase'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'phase_'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/betabeatsrc_output_converter.html#convert_old_phase"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Looks in the provided directory for expected phase file from <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> for a given
+plane, converts it to the output format used by <code class="docutils literal notranslate"><span class="pre">omc3</span></code> and  write them to the new location.</p>
+<p>The file naming should be getphase(x,y).out, with the following expected columns: NAME, NAME2, S, S1,
+COUNT, PHASEX, STDPHX, PHXMDL, MUXMDL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the directory with BetaBeat.src output files.</p></li>
+<li><p><strong>outputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the output directory for converted files.</p></li>
+<li><p><strong>suffix</strong> (<em>str</em>) -- Compensation suffix used in the provided BetaBeat.src output files.</p></li>
+<li><p><strong>plane</strong> (<em>str</em>) -- the transverse plane for which to look for the output file.</p></li>
+<li><p><strong>old_file_name</strong> (<em>str</em>) -- the standard naming for the old output file.</p></li>
+<li><p><strong>new_file_name</strong> (<em>str</em>) -- the standard naming for the new converted file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.betabeatsrc_output_converter.</span></span><span class="sig-name descname"><span class="pre">convert_old_total_phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'phasetot'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'total_phase_'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/betabeatsrc_output_converter.html#convert_old_total_phase"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Looks in the provided directory for expected total phase file from <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> for a given
+plane, converts it to the output format used by <code class="docutils literal notranslate"><span class="pre">omc3</span></code> and  write them to the new location.</p>
+<p>The file naming should be getphasetot(x,y).out, with the following expected columns: NAME, NAME2, S,
+S1, COUNT, PHASEX, STDPHX, PHXMDL, MUXMDL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the directory with BetaBeat.src output files.</p></li>
+<li><p><strong>outputdir</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>str</em><em>]</em>) -- Location of the output directory for converted files.</p></li>
+<li><p><strong>suffix</strong> (<em>str</em>) -- Compensation suffix used in the provided BetaBeat.src output files.</p></li>
+<li><p><strong>plane</strong> (<em>str</em>) -- the transverse plane for which to look for the output file.</p></li>
+<li><p><strong>old_file_name</strong> (<em>str</em>) -- the standard naming for the old output file.</p></li>
+<li><p><strong>new_file_name</strong> (<em>str</em>) -- the standard naming for the new converted file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.betabeatsrc_output_converter.</span></span><span class="sig-name descname"><span class="pre">converter_entrypoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DotDict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/betabeatsrc_output_converter.html#converter_entrypoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Looks for expected <code class="docutils literal notranslate"><span class="pre">BetaBeat.src</span></code> output files in the provided input directory, converts them to
+the format used in <code class="docutils literal notranslate"><span class="pre">omc3</span></code> and writes the converted files in the provided output directory.</p>
+<p><em>--Required--</em></p>
+<ul>
+<li><p><strong>inputdir</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Directory with BetaBeat.src output files.</p>
+</div></blockquote>
+</li>
+<li><p><strong>outputdir</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Output directory for converted files.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>suffix</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>AC dipole compensation suffix used in the provided BetaBeat.src output (‘_free’ for
+compensation by equation, ‘_free2’ by model).</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">('',</span> <span class="pre">'_free',</span> <span class="pre">'_free2')</span></code></p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">_free</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
+<section id="import-k-modulation-results">
+<h2>Import K-Modulation Results<a class="headerlink" href="#import-k-modulation-results" title="Link to this heading"></a></h2>
+<p>Imports K-Mod data and writes them into a file containing beta data,
+in the same format as beta-from-phase or beta-from-amplitude.
+This data can then be easily used for the same purposes, e.g. global correction.</p>
+<p><strong>Arguments:</strong></p>
+<p><em>--Required--</em></p>
+<ul>
+<li><p><strong>meas_files</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Paths to the Kmod results files to import.
+Can be either the TFS-files directly or a path to a folder containing them.</p>
+</div></blockquote>
+</li>
+<li><p><strong>model</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Path to the model twiss file, or a folder containing ‘twiss_elemtents.dat’.
+The model determines which elements to keep.</p>
+</div></blockquote>
+</li>
+<li><p><strong>beam</strong> <em>(int)</em>:</p>
+<blockquote>
+<div><p>Beam for which to import.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>output_dir</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Path to the directory where to write the output files.</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.kmod_import.</span></span><span class="sig-name descname"><span class="pre">convert_betastar_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">betastar_results_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">tfs.TfsDataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tfs.TfsDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beam</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tfs.TfsDataFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/omc3/scripts/kmod_import.html#convert_betastar_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Convert K-Modulation BetaStar results to kmod-DataFrames
+that can be placed in the optics-measurement directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>betastar_results_list</strong> (<em>Sequence</em><em>[</em><em>tfs.TfsDataFrame</em><em>]</em>) -- List of BetaStar results.</p></li>
+<li><p><strong>df_model</strong> (<em>tfs.TfsDataFrame</em>) -- Model data.</p></li>
+<li><p><strong>beam</strong> (<em>int</em>) -- Beam to import.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of kmod-DataFrames by planes and with BETASTAR ID as key.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, tfs.TfsDataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.kmod_import.</span></span><span class="sig-name descname"><span class="pre">convert_bpm_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bpm_results_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">tfs.TfsDataFrame</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tfs.TfsDataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tfs.TfsDataFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/omc3/scripts/kmod_import.html#convert_bpm_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Convert K-Modulation BPM results to kmod-DataFrames
+that can be placed in the optics-measurement directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bpm_results_list</strong> (<em>Sequence</em><em>[</em><em>tfs.TfsDataFrame</em><em>]</em>) -- List of BPM results.</p></li>
+<li><p><strong>df_model</strong> (<em>tfs.TfsDataFrame</em>) -- Model data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of kmod-DataFrames by planes and with BPM ID as key.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, tfs.TfsDataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.kmod_import.</span></span><span class="sig-name descname"><span class="pre">import_kmod_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DotDict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tfs.TfsDataFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/omc3/scripts/kmod_import.html#import_kmod_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Reads model and measurement files to calculate differences in beta functions
+and writes the results to output files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>measurements</strong> (<em>Sequence</em><em>[</em><em>Path</em><em>|</em><em>str</em><em>]</em>) -- A sequence of k-modulation results files to import.
+This can include either single measurements (e.g., ‘lsa_results.tfs’),
+averaged results (e.g., ‘averaged_bpm_beam1_ip1_beta0.22m.tfs’) or a
+path to the folder containing multiple of such files.</p></li>
+<li><p><strong>model</strong> (<em>Path</em><em>|</em><em>str</em>) -- Path to the model twiss file, or a folder containing ‘twiss_elements.dat’.
+Determines which elements to keep, i.e. <cite>twiss.dat</cite> keeps only the BPMs,
+<cite>twiss_elements.dat</cite> keeps BPMs and IPs.</p></li>
+<li><p><strong>output_dir</strong> (<em>Path</em><em>|</em><em>str</em>) -- Path to the output directory, i.e. the optics-measurement directory
+into which to import these K-Modulation results.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of kmod-DataFrames by planes and IDs (BPM, BETASTAR).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.kmod_import.</span></span><span class="sig-name descname"><span class="pre">read_model_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">TfsDataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/kmod_import.html#read_model_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Read model twiss file,
+either directly or twiss_elements.dat from a folder.</p>
+</dd></dl>
+
+<section id="k-mod-luminosity-imbalance">
+<h2>K-Mod Luminosity Imbalance<a class="headerlink" href="#k-mod-luminosity-imbalance" title="Link to this heading"></a></h2>
+<p>Calculate the luminosity imbalance from the averaged K-modulation results,
+based on the effective betas for two IPs, i.e. assuming that apart from the
+beta-function all other parameters are identical for the two IPs.</p>
+<p>This script needs the data in the format of the average script <cite>kmod_average.py</cite>,
+as the imbalance is calculated over both beams and this data is only available
+at that point.
+The dataframes therefore need to have the columns <cite>BEAM</cite>, <cite>BETSTAR</cite> and <cite>ERRBETSTAR</cite>,
+and data for both beams needs to be available.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You need to provide the data for exactly two of the four IP’s.</p>
+</div>
+<p><strong>Arguments:</strong></p>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>ip1</strong> <em>(PathOrStrOrDataFrame)</em>:</p>
+<blockquote>
+<div><p>Path or DataFrame of the averaged beta-star results of IP1.</p>
+</div></blockquote>
+</li>
+<li><p><strong>ip2</strong> <em>(PathOrStrOrDataFrame)</em>:</p>
+<blockquote>
+<div><p>Path or DataFrame of the averaged beta-star results of IP2.</p>
+</div></blockquote>
+</li>
+<li><p><strong>ip5</strong> <em>(PathOrStrOrDataFrame)</em>:</p>
+<blockquote>
+<div><p>Path or DataFrame of the averaged beta-star results of IP5.</p>
+</div></blockquote>
+</li>
+<li><p><strong>ip8</strong> <em>(PathOrStrOrDataFrame)</em>:</p>
+<blockquote>
+<div><p>Path or DataFrame of the averaged beta-star results of IP8.</p>
+</div></blockquote>
+</li>
+<li><p><strong>betastar</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Model beta-star values (x, y) of measurements. Only used for filename.</p>
+</div></blockquote>
+</li>
+<li><p><strong>output_dir</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Path to the directory where to write the output files.</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.kmod_lumi_imbalance.</span></span><span class="sig-name descname"><span class="pre">calculate_lumi_imbalance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DotDict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tfs.TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/kmod_lumi_imbalance.html#calculate_lumi_imbalance"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Perform the luminosity imbalance calculation.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.kmod_lumi_imbalance.</span></span><span class="sig-name descname"><span class="pre">get_effective_beta_star_w_err</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TfsDataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/omc3/scripts/kmod_lumi_imbalance.html#get_effective_beta_star_w_err"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Calculates the effective beta*, i.e. the denominator of the luminosity as given in e.g.
+Eq(17): <a class="reference external" href="https://cds.cern.ch/record/941318/files/p361.pdf">https://cds.cern.ch/record/941318/files/p361.pdf</a> , without any constants
+as we assume here that these are equal for both IPs, and we only care about the ratio.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.kmod_lumi_imbalance.</span></span><span class="sig-name descname"><span class="pre">get_imbalance_w_err</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ipA_beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ipA_beta_err</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ipB_beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ipB_beta_err</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/omc3/scripts/kmod_lumi_imbalance.html#get_imbalance_w_err"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Calculate the luminosity imbalance IP_A / IP_B  and its error, based on the effective betas for IP_A and IP_B.
+This implies, that all the other beam parameters (see e.g. Eq(17): <a class="reference external" href="https://cds.cern.ch/record/941318/files/p361.pdf">https://cds.cern.ch/record/941318/files/p361.pdf</a>)
+are the same for both IPs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.kmod_lumi_imbalance.</span></span><span class="sig-name descname"><span class="pre">get_lumi_imbalance_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/kmod_lumi_imbalance.html#get_lumi_imbalance_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Calculate the effective beta stars and the luminosity imbalance from the input dataframes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ipA</strong> (<em>tfs.TfsDataFrame</em>) -- a <cite>TfsDataFrame</cite> with the averaged results from a kmod analysis, for IP_A.</p></li>
+<li><p><strong>ipB</strong> (<em>tfs.TfsDataFrame</em>) -- a <cite>TfsDataFrame</cite> with the averaged results from a kmod analysis, for IP_B.</p></li>
+<li><p><strong>(</strong><strong>Actually</strong></p></li>
+<li><p><strong>fine.</strong><strong>)</strong> (<em>any name that ends with an integer is</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>tfs.TfsDataFrame with effective beta stars per IP and the luminosity imbalance added to the header.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="update-natural-tune-in-lin-files">
+<h2>Update Natural Tune in Lin-Files<a class="headerlink" href="#update-natural-tune-in-lin-files" title="Link to this heading"></a></h2>
+<p>Script to update the natural tune in lin files, based on the spectrum data (amps and freqs) and a
+given frequency interval.</p>
+<p><strong>Arguments:</strong></p>
+<p><em>--Required--</em></p>
+<ul class="simple">
+<li><p><strong>files</strong>: List of paths to the spectrum files.
+The files need to be given without their ‘.lin’/’.amps[xy]’,’.freqs[xy]’ endings.
+(So usually the path of the TbT-Data file.)</p></li>
+<li><p><strong>interval</strong> <em>(float)</em>: Frequency interval in which the highest peak should be found.</p></li>
+</ul>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>bpms</strong>: List of BPMs which need to be updated. If not given it will be all of them.</p></li>
+<li><p><strong>not_found_action</strong> <em>(str)</em>: Defines what to do, if no line was found in given interval.
+‘error’: throws a ValueError; ‘remove’: removes the bpm; ‘ignore’: keeps the old values.</p>
+<p>Choices: <code class="docutils literal notranslate"><span class="pre">['error',</span> <span class="pre">'remove',</span> <span class="pre">'ignore']</span></code>
+Default: <code class="docutils literal notranslate"><span class="pre">error</span></code></p>
+</li>
+<li><p><strong>planes</strong> <em>(str)</em>: Which planes.</p>
+<p>Choices: <code class="docutils literal notranslate"><span class="pre">('X',</span> <span class="pre">'Y')</span></code>
+Default: <code class="docutils literal notranslate"><span class="pre">['X',</span> <span class="pre">'Y']</span></code></p>
+</li>
+<li><p><strong>rename_suffix</strong> <em>(str)</em>: Additional suffix for output lin-file.
+Will be inserted between filename and extension.
+If empty, the original file is overwritten - unless they are old files,
+then the omc3 filename convention will be used.</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</li>
+</ul>
+</section>
+<section id="write-mad-x-macros">
+<h2>Write MAD-X Macros<a class="headerlink" href="#write-mad-x-macros" title="Link to this heading"></a></h2>
+<p>Write out madx scripts for the tracking macros.</p>
+<p><strong>Arguments:</strong></p>
+<p><em>--Required--</em></p>
+<ul>
+<li><p><strong>outputdir</strong>:</p>
+<blockquote>
+<div><p>Directory where the observation_points.def will be put.</p>
+</div></blockquote>
+</li>
+<li><p><strong>twissfile</strong>:</p>
+<blockquote>
+<div><p>Path to twissfile with observationspoint in the NAME column.</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="fake-measurement-from-model">
+<h2>Fake Measurement from Model<a class="headerlink" href="#fake-measurement-from-model" title="Link to this heading"></a></h2>
+<p>Script to generate a pseudo-measurement from a twiss-model.</p>
+<p>The <cite>model</cite> the then generated measurement is compared to can be different
+from the <cite>twiss</cite> given, e.g. if the <cite>twiss</cite> incorporates errors.</p>
+<p><strong>Arguments:</strong></p>
+<p><em>--Required--</em></p>
+<ul>
+<li><p><strong>twiss</strong> <em>(PathOrStrOrDataFrame)</em>:</p>
+<blockquote>
+<div><p>Twiss dataframe or path to twiss-file.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>model</strong> <em>(PathOrStrOrDataFrame)</em>:</p>
+<blockquote>
+<div><p>Alternative Model (Dataframe or Path) to use. If not given, <cite>twiss</cite>
+will be used.</p>
+</div></blockquote>
+</li>
+<li><p><strong>outputdir</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Path to the output directory for the fake measurement.</p>
+</div></blockquote>
+</li>
+<li><p><strong>parameters</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Optics parameters to use</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">('PHASEX',</span> <span class="pre">'PHASEY',</span> <span class="pre">'BETX',</span> <span class="pre">'BETY',</span> <span class="pre">'DX',</span> <span class="pre">'DY',</span> <span class="pre">'NDX',</span> <span class="pre">'F1010',</span> <span class="pre">'F1001')</span></code></p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">['PHASEX',</span> <span class="pre">'PHASEY',</span> <span class="pre">'BETX',</span> <span class="pre">'BETY',</span> <span class="pre">'DX',</span> <span class="pre">'DY',</span> <span class="pre">'NDX',</span> <span class="pre">'F1010',</span> <span class="pre">'F1001']</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>randomize</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Randomize values and/or errors from gaussian distributions. If not
+randomized, measurement values will be equal to the model values and
+the errors will be equal to the relative error * measurement.</p>
+<p>choices: <code class="docutils literal notranslate"><span class="pre">['values',</span> <span class="pre">'errors']</span></code></p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">[]</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>relative_errors</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Relative errors. Either single value for all paramters orlist of
+values in order of parameters.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">[0.0]</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>seed</strong> <em>(int)</em>:</p>
+<blockquote>
+<div><p>Set random seed.</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.fake_measurement_from_model.</span></span><span class="sig-name descname"><span class="pre">append_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">planes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/fake_measurement_from_model.html#append_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Add the values to the measurement.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.fake_measurement_from_model.</span></span><span class="sig-name descname"><span class="pre">create_beta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_twiss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/fake_measurement_from_model.html#create_beta"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create both beta_amp and beta_phase measurements.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.fake_measurement_from_model.</span></span><span class="sig-name descname"><span class="pre">create_coupling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_twiss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/fake_measurement_from_model.html#create_coupling"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Creates coupling measurements for either the difference or sum RDT.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.fake_measurement_from_model.</span></span><span class="sig-name descname"><span class="pre">create_dispersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_twiss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/fake_measurement_from_model.html#create_dispersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Creates dispersion measurement.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.fake_measurement_from_model.</span></span><span class="sig-name descname"><span class="pre">create_measurement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_twiss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/fake_measurement_from_model.html#create_measurement"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create a new measurement Dataframe from df_twiss from parameter.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.fake_measurement_from_model.</span></span><span class="sig-name descname"><span class="pre">create_normalized_dispersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_disp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_beta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/fake_measurement_from_model.html#create_normalized_dispersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Creates normalized dispersion from pre-created dispersion and beta dataframes.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.fake_measurement_from_model.</span></span><span class="sig-name descname"><span class="pre">create_phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_twiss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/fake_measurement_from_model.html#create_phase"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Creates both phase advance and total phase measurements.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.fake_measurement_from_model.</span></span><span class="sig-name descname"><span class="pre">create_phase_advance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_twiss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/fake_measurement_from_model.html#create_phase_advance"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Creates phase advance measurements.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.fake_measurement_from_model.</span></span><span class="sig-name descname"><span class="pre">create_total_phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_twiss</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/fake_measurement_from_model.html#create_total_phase"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Creates total phase measurements.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.fake_measurement_from_model.</span></span><span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TfsDataFrame</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/omc3/scripts/fake_measurement_from_model.html#generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Takes a twiss file and writes the parameters in optics_parameters to Output_dir in the format
+global_correction_entrypoint uses (same format you would get from hole_in_one).</p>
+</dd></dl>
+
+<section id="linfile-cleaning">
+<h2>Linfile Cleaning<a class="headerlink" href="#linfile-cleaning" title="Link to this heading"></a></h2>
+<p>Performs an automated cleaning of different columns in the lin-file
+as a standalone script to allow for manual refinement after harpy is done.</p>
+<p>The type of cleaning is determined by the number of values in the <code class="docutils literal notranslate"><span class="pre">limit</span></code>
+parameter. When no <code class="docutils literal notranslate"><span class="pre">limit</span></code> is given or a single number is given,
+auto-cleaning is performed:</p>
+<p>All data is assumed to be gaussian distributed around a “true” value,
+and outliers are cleaned by calculating average and standard deviation
+of the given data.</p>
+<p>The cleaning is done by removing all data-points that are outside of the
+1-0.5/n estimated percentile of the data. Where n is the number of
+(remaining) data-points in each loop, and the process is repeated until
+n stays constant (or 2 or less data-points remain).</p>
+<p>Datapoints with a standard deviation smaller than the given limit are not
+cleaned. The limit is given in whatever units the data itself is in and
+is an absolute value.</p>
+<p>If two values are given for the <code class="docutils literal notranslate"><span class="pre">limit</span></code> parameter, all data-points in between
+these limits are kept and all data-points outside of these limits are cleaned.</p>
+<p>Cleaning is done per given file independently
+i.e. removed BPMs from one file can be present in the next.
+The columns are iterated on the same file, i.e. the cleaning is done
+consecutively on the already cleaned data from the last column,
+yet the moments of the distribution themselves are evaluated per column.</p>
+<p>In the end, the lin-files are overwritten with the cleaned ones.
+If the <code class="docutils literal notranslate"><span class="pre">backup</span></code> option is activated, a backup of the original file
+is created, which can be restored via the <code class="docutils literal notranslate"><span class="pre">restore</span></code> option.
+In case the restore-flag is given, only the filenames are required.
+No cleaning is performed with this option.</p>
+<p><strong>Arguments:</strong></p>
+<p><em>--Required--</em></p>
+<ul>
+<li><p><strong>files</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>List of paths to the lin-files, including suffix.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>backup</strong>:</p>
+<blockquote>
+<div><p>Create a backup of the files before overwriting. The backups are
+numbered, with the highest number being the latest backup.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>columns</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Columns to clean on.</p>
+</div></blockquote>
+</li>
+<li><p><strong>keep</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Do not clean BPMs with given names.</p>
+</div></blockquote>
+</li>
+<li><p><strong>limit</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Two values: Do not clean data-points in between these values.
+Single value (auto-clean): Do not clean data-points deviating less than this limit from the average.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">0.0</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>restore</strong>:</p>
+<blockquote>
+<div><p>Restore the latest backup of the files. If this parameter is given, no
+cleaning is performed.</p>
+<p>action: <code class="docutils literal notranslate"><span class="pre">store_true</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<p>TODO:
+also use isolation forest, BUT this probably needs some modification there
+as well, as it only cleans on TUNE, not on NATTUNE.
+And it requires an accelerator instance.</p>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.linfile_clean.</span></span><span class="sig-name descname"><span class="pre">clean_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/linfile_clean.html#clean_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Clean the columns in the given files.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.linfile_clean.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/linfile_clean.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Main function, to parse commandline input and separate restoration
+from cleaning.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.linfile_clean.</span></span><span class="sig-name descname"><span class="pre">restore_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/linfile_clean.html#restore_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Restore backupped files.</p>
+</dd></dl>
+
+<section id="bad-bpms-summary">
+<h2>Bad BPMs Summary<a class="headerlink" href="#bad-bpms-summary" title="Link to this heading"></a></h2>
+<p>Scans all measurements in a list of given GUI output folders and compiles a list of bad BPMs with
+their given number of appearances after ‘harpy’ and ‘isolation forest’.</p>
+<div class="admonition-usage admonition">
+<p class="admonition-title">Usage</p>
+<p>Get bad BPMs for LHC-Beam 1 from September 2024 and 2024-10-03</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python -m omc3.scripts.bad_bpms_summary --dates 2024-09-* 2024-10-03 --accel_glob LHCB1 --outfile bad_bpms_sep_2024.txt  --print_percentage 50
+</pre></div>
+</div>
+</div>
+<p><em>--Required--</em></p>
+<ul>
+<li><p><strong>dates</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Dates to include in analysis. This should be either subfolders in
+<cite>root</cite> or glob-patterns for those.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><em>--Optional--</em></p>
+<ul>
+<li><p><strong>accel_glob</strong> <em>(str)</em>:</p>
+<blockquote>
+<div><p>Accelerator name (glob for the sub-directories).</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">LHCB*</span></code></p>
+</div></blockquote>
+</li>
+<li><p><strong>outfile</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Path to the file to write out.</p>
+</div></blockquote>
+</li>
+<li><p><strong>print_percentage</strong> <em>(float)</em>:</p>
+<blockquote>
+<div><p>Print out BPMs that appear in more than this percentage of
+measurements.</p>
+</div></blockquote>
+</li>
+<li><p><strong>root</strong> <em>(PathOrStr)</em>:</p>
+<blockquote>
+<div><p>Path to the root directory, containing the dates.</p>
+<p>default: <code class="docutils literal notranslate"><span class="pre">/user/slops/data/LHC_DATA/OP_DATA/Betabeat</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">omc3.scripts.bad_bpms_summary.</span></span><span class="sig-name descname"><span class="pre">HarpyReasons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/bad_bpms_summary.html#HarpyReasons"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Reasons for bad BPMs in the Harpy clean step.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.bad_bpms_summary.</span></span><span class="sig-name descname"><span class="pre">collect_bad_bpm_files_in_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/bad_bpms_summary.html#collect_bad_bpm_files_in_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Collect bad-bpms for a single measurement directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<em>Path</em>) -- Path to the directory possibly containing bad-bpm files of type <cite>file_types</cite>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TfsDataFrame with all bad-bpms from the given directory.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tfs.TfsDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.bad_bpms_summary.</span></span><span class="sig-name descname"><span class="pre">collect_bad_bpms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accel_glob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tfs.TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/bad_bpms_summary.html#collect_bad_bpms"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create a TfsDataFrame with all bad-bpms within selected dates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root</strong> (<em>Path</em>) -- Root path to the GUI output folder.</p></li>
+<li><p><strong>dates</strong> (<em>Sequence</em><em>[</em><em>Path</em><em> | </em><em>str</em><em>]</em>) -- List of dates or glob patterns to collect bad-bpms from.</p></li>
+<li><p><strong>accel_glob</strong> (<em>str</em>) -- Accelerator name (glob for the sub-directories).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TfsDataFrame with all bad-bpms within selected dates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tfs.TfsDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.bad_bpms_summary.</span></span><span class="sig-name descname"><span class="pre">collect_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accel_glob</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/bad_bpms_summary.html#collect_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Collect bad-bpms for a single date, by checking the sub-directories
+which conform to the <cite>accel_glob</cite> pattern.</p>
+<p>In each accel directory, check for sub-directories named <cite>Measurements</cite> and <cite>Results</cite>,
+which in turn contain which in turn have entries containing the bad-bpms files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date_dir</strong> (<em>Path</em>) -- Path to the date directory.</p></li>
+<li><p><strong>accel_glob</strong> (<em>str</em>) -- Accelerator name (glob for the sub-directories).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TfsDataFrame with all bad-bpms for the date.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tfs.TfsDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.bad_bpms_summary.</span></span><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TfsDataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/bad_bpms_summary.html#evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Evaluates the gathered bad-bpms and returns a TfsDataFrame with the results.</p>
+<p>The evaluation is based on the following criteria:
+- Count how often a BPM is bad
+- Count the total number of (unique) files for each combination of accelerator, source and plane</p>
+<p>From this information the percentage of how often a BPM is deemed bad is calculated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>tfs.TfsDataFrame</em>) -- TfsDataFrame with all bad-bpms.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TfsDataFrame with the evaluated results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tfs.TfsDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.bad_bpms_summary.</span></span><span class="sig-name descname"><span class="pre">get_empty_df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/bad_bpms_summary.html#get_empty_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Create an empty TfsDataFrame with the correct column names.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.bad_bpms_summary.</span></span><span class="sig-name descname"><span class="pre">merge_reasons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TfsDataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/bad_bpms_summary.html#merge_reasons"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Merge the REASONS column into a string of reasons.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.bad_bpms_summary.</span></span><span class="sig-name descname"><span class="pre">print_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_counted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TfsDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_percentage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/omc3/scripts/bad_bpms_summary.html#print_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Log the results to console (INFO level if logger is setup, print otherwise).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df_counted</strong> (<em>tfs.TfsDataFrame</em>) -- TfsDataFrame with the evaluated results.</p></li>
+<li><p><strong>print_percentage</strong> (<em>float</em>) -- Print out BPMs that appear in more than this percentage of measurements.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.bad_bpms_summary.</span></span><span class="sig-name descname"><span class="pre">read_harpy_bad_bpms_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">svd_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/bad_bpms_summary.html#read_harpy_bad_bpms_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Reads a harpy bad-bpm file and returns a TfsDataFrame with all unique bad-bpms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>svd_file</strong> (<em>Path</em>) -- Path to the bad-bpm file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TfsDataFrame with all unique bad-bpms.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tfs.TfsDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">omc3.scripts.bad_bpms_summary.</span></span><span class="sig-name descname"><span class="pre">read_iforest_bad_bpms_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iforest_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TfsDataFrame</span></span></span><a class="reference internal" href="../_modules/omc3/scripts/bad_bpms_summary.html#read_iforest_bad_bpms_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
+<dd><p>Reads an iforest bad-bpm file and returns a TfsDataFrame with all unique bad-bpms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>iforest_file</strong> (<em>Path</em>) -- Path to the bad-bpm file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>TfsDataFrame with all unique bad-bpms.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tfs.TfsDataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plotting.html" class="btn btn-neutral float-left" title="Plotting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../modules/correction.html" class="btn btn-neutral float-right" title="Correction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
